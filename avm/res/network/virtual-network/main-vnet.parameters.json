@@ -1,0 +1,46 @@
+{
+  "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+    "name": {
+      "value": "DevOps-Network"
+    },
+    "addressPrefixes": {
+      "value": [
+        "10.0.0.0/16"
+      ]
+    },
+    "ipamPoolNumberOfIpAddresses": {},
+    "virtualNetworkBgpCommunity": {},
+    "subnets": {
+      "value": [
+        {
+          "name": "DevSubnet",
+          "addressPrefix": "10.0.0.0/24"
+        },
+        {
+          "name": "AzureBastionSubnet",
+          "addressPrefix": "10.0.1.0/27"
+        }
+      ]
+    },
+    "dnsServers": {},
+    "ddosProtectionPlanResourceId": {},
+    "peerings": {},
+    "vnetEncryption": {
+      "value": false
+    },
+    "vnetEncryptionEnforcement": {},
+    "flowTimeoutInMinutes": {
+      "value": 0
+    },
+    "diagnosticSettings": {},
+    "lock": {},
+    "roleAssignments": {},
+    "tags": {},
+    "enableTelemetry": {
+      "value": false
+    },
+    "enableVmProtection": {}
+  }
+}

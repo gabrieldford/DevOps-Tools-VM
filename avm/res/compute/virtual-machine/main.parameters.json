@@ -1,0 +1,203 @@
+{
+  "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+    "name": {
+      "value": "devOps-Tools"
+    },
+    "vmSize": {
+      "value": "standard_D4as_v6"
+    },
+    "encryptionAtHost": {
+      "value": false
+    },
+    "securityType": {},
+    "secureBootEnabled": {
+      "value": false
+    },
+    "vTpmEnabled": {
+      "value": false
+    },
+    "imageReference": {
+      "value": {
+        "publisher": "MicrosoftWindowsDesktop",
+        "offer": "windows-11",
+        "sku": "win11-24h2-pro",
+        "version": "latest"
+      }
+    },
+    "osDisk": {
+      "value": {
+        "name": "osDisk",
+        "caching": "ReadWrite",
+        "createOption": "FromImage",
+        "managedDisk": {
+          "storageAccountType": "Standard_LRS"
+        },
+        "diskSizeGB": 128
+      }
+    },
+    "ultraSSDEnabled": {
+      "value": false
+    },
+    "hibernationEnabled": {
+      "value": false
+    },
+    "adminUsername": {
+      "value": "AzureUser"
+    },
+    "adminPassword": {
+      "reference": {
+        "keyVault": {
+          "id": "/subscriptions/58a4a8cd-3b3b-4fcc-ad44-d7bf8c3df844/resourceGroups/DevOps-Tools/providers/Microsoft.KeyVault/vaults/DevOps-gdf-KV"
+        },
+        "secretName": "DevOps-Vm-Secretv2"
+      }
+    },
+    "userData": {
+      "value": ""
+    },
+    "customData": {
+      "value": ""
+    },
+    "certificatesToBeInstalled": {},
+    "priority": {},
+    "evictionPolicy": {},
+    "maxPriceForLowPriorityVm": {
+      "value": ""
+    },
+    "dedicatedHostId": {
+      "value": ""
+    },
+    "licenseType": {},
+    "publicKeys": {},
+    "managedIdentities": {
+      "value": {
+        "systemAssigned": true,
+        "userAssignedResourceIds": [
+          "/subscriptions/58a4a8cd-3b3b-4fcc-ad44-d7bf8c3df844/resourcegroups/DevOps-Tools/providers/Microsoft.ManagedIdentity/userAssignedIdentities/devOps-ToolsVm-identity"
+        ]
+      }
+    },
+    "bootDiagnostics": {
+      "value": false
+    },
+    "bootDiagnosticStorageAccountName": {
+      "value": ""
+    },
+    "bootDiagnosticStorageAccountUri": {
+      "value": ""
+    },
+    "proximityPlacementGroupResourceId": {
+      "value": ""
+    },
+    "virtualMachineScaleSetResourceId": {
+      "value": ""
+    },
+    "availabilitySetResourceId": {
+      "value": ""
+    },
+    "galleryApplications": {},
+    "zone": {
+      "value": 0
+    },
+    "nicConfigurations": {
+      "value": [
+        {
+          "ipConfigurations" : [
+            {
+              "name": "ipconfig1",
+              "privateIPAllocationMethod": "Dynamic",
+              "subnetResourceId": "/subscriptions/58a4a8cd-3b3b-4fcc-ad44-d7bf8c3df844/resourceGroups/DevOps-Tools/providers/Microsoft.Network/virtualNetworks/DevOps-Network/subnets/DevSubnet",
+              "privateIPAddressVersion": "IPv4",
+              "primary": true
+            }
+          ]
+        }
+      ]
+    },
+    "backupVaultName": {
+      "value": ""
+    },
+    "backupVaultResourceGroup": {
+      "value": ""
+    },
+    "backupPolicyName": {
+      "value": ""
+    },
+    "autoShutdownConfig": {
+      "value": 
+        {
+          "status": "Enabled",
+          "timezone": "Eastern Standard Time",
+          "dailyRecurrenceTime": "22:00",
+          "notificationSettings": {
+            "status": "Enabled",
+            "webhookResourceId": "",
+            "emailRecipient": "gabrielford@microsoft.com",
+            "emailStatus": "Enabled"
+          }
+        }
+    },
+    "maintenanceConfigurationResourceId": {
+      "value": ""
+    },
+    "extensionDomainJoinPassword": {
+      "value": ""
+    },
+    "extensionDomainJoinConfig": {
+      "value": {}
+    },
+    "extensionAadJoinConfig": {
+      "value": {
+        "enabled": false
+      }
+    },
+    "extensionAntiMalwareConfig":{
+      "value": {
+        "enabled": false
+      }
+    },
+    "location": {
+      "value": ""
+    },
+    "lock": {},
+    "roleAssignments": {},
+    "tags": {},
+    "enableTelemetry": {
+      "value": false
+    },
+    "sasTokenValidityLength": {
+      "value": "PT8H"
+    },
+    "osType": {
+      "value": "Windows"
+    },
+    "disablePasswordAuthentication": {
+      "value": false
+    },
+    "provisionVMAgent": {
+      "value": false
+    },
+    "enableAutomaticUpdates": {
+      "value": false
+    },
+    "patchMode": {},
+    "bypassPlatformSafetyChecksOnUserSchedule": {
+      "value": false
+    },
+    "rebootSetting": {},
+    "patchAssessmentMode": {},
+    "enableHotpatching": {
+      "value": false
+    },
+    "timeZone": {
+      "value": "Eastern Standard Time"
+    },
+    "additionalUnattendContent": {},
+    "winRMListeners": {},
+    "configurationProfile": {
+      "value": ""
+    }
+  }
+}
