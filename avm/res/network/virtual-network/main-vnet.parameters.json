@@ -3,7 +3,7 @@
   "contentVersion": "1.0.0.0",
   "parameters": {
     "name": {
-      "value": "DevOps-Network"
+      "value": "DevOps-NetworkV2"
     },
     "addressPrefixes": {
       "value": [

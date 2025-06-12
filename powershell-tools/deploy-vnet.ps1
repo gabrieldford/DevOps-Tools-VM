@@ -1,8 +1,8 @@
 # Define reusable variables
 $deploymentName = "DevOpsVnetDeployment"
-$templateFile = "c:\Dev-Environment\bicep-registry-modules\avm\res\network\virtual-network\main-vnet.bicep"
-$parametersFile = "c:\Dev-Environment\bicep-registry-modules\avm\res\network\virtual-network\main-vnet.parameters.json"
-$resourceGroupName = "DevOps-Tools"
+$templateFile = "c:\Dev-Environment\Devops-Tools-VM\avm\res\network\virtual-network\main-vnet.bicep"
+$parametersFile = "c:\Dev-Environment\Devops-Tools-VM\avm\res\network\virtual-network\main-vnet.parameters.json"
+$resourceGroupName = "DevOps-ToolsV2"
 $deploymentLocation = "eastus"
 $subscriptionId = "58a4a8cd-3b3b-4fcc-ad44-d7bf8c3df844" # Replace with your subscription ID
 

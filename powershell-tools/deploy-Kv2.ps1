@@ -1,10 +1,10 @@
 # Define reusable variables
 $deploymentName = "DevOpsKvDeployment"
-$templateFile = "c:\Dev-Environment\bicep-registry-modules\avm\res\key-vault\vault\devops-kv.bicep"
-$resourceGroupName = "DevOps-Tools"
+$templateFile = "c:\Dev-Environment\Devops-Tools-VM\avm\res\key-vault\vault\devops-kv.bicep"
+$resourceGroupName = "DevOps-ToolsV2"
 $deploymentLocation = "eastus"
 $subscriptionId = "58a4a8cd-3b3b-4fcc-ad44-d7bf8c3df844"
-$uamiName = "devOps-ToolsVm-identity" # Name of your user-assigned managed identity
+$uamiName = "devOps-ToolsVm-identityV2" # Name of your user-assigned managed identity
 
 # Connect to Azure and select the subscription
 Connect-AzAccount -SubscriptionId $subscriptionId
@@ -20,5 +20,5 @@ New-AzResourceGroupDeployment `
   -ResourceGroupName $resourceGroupName `
   -Location $deploymentLocation `
   -TemplateFile $templateFile `
-  -vmPrincipalId $principalId  # Ensure this parameter exists in the Bicep template
+  -vmMiPrincipalId $principalId  # Ensure this parameter exists in the Bicep template
 

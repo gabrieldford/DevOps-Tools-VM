@@ -9,10 +9,10 @@ metadata description = 'This module deploys a Key Vault.'
 // ================ //
 @description('Required. Name of the Key Vault. Must be globally unique.')
 @maxLength(24)
-param name string = 'DevOps-gdf-Kv'
+param name string = 'DevOps-gdf-Kv2'
 
 @description('The principal Id of the VM. Passed in from the powershell deployment script.')
-param vmPrincipalId string 
+param vmMiPrincipalId string 
 
 @description('Optional. Location for all resources.')
 param location string = resourceGroup().location
@@ -90,13 +90,13 @@ import { roleAssignmentType } from 'br/public:avm/utl/types/avm-common-types:0.5
 param roleAssignments roleAssignmentType[] = [
   {
     //principalId: '228ca9ce-ec1f-4cdc-983d-a351a3ce4f94' // This is the DevOps VM's managed identity
-    principalId: vmPrincipalId
+    principalId: vmMiPrincipalId
     roleDefinitionIdOrName: 'Key Vault Secrets User'
     description: 'This role assignment allows the DevOps VM to read secrets from the Key Vault.'
     principalType: 'ServicePrincipal'
   }
   {
-    principalId: '75e8c793-8646-411a-b342-7a1a4c53620d'  //User Identity
+    principalId: '75e8c793-8646-411a-b342-7a1a4c53620d'  //GabrielUser Identity
     roleDefinitionIdOrName: 'Key Vault Administrator'
     description: 'This role assignment users full control of data plane.'
     principalType: 'User'

@@ -2,13 +2,13 @@ metadata name = 'Bastion Hosts'
 metadata description = 'This module deploys a Bastion Host.'
 
 @description('Required. Name of the Azure Bastion resource.')
-param name string = 'DevOps-Bastion'
+param name string = 'DevOps-BastionV2'
 
 @description('Optional. Location for all resources.')
 param location string = resourceGroup().location
 
 @description('Required. Shared services Virtual Network resource Id.')
-param virtualNetworkResourceId string = '/subscriptions/58a4a8cd-3b3b-4fcc-ad44-d7bf8c3df844/resourceGroups/DevOps-Tools/providers/Microsoft.Network/virtualNetworks/DevOps-Network'
+param virtualNetworkResourceId string = '/subscriptions/58a4a8cd-3b3b-4fcc-ad44-d7bf8c3df844/resourceGroups/DevOps-ToolsV2/providers/Microsoft.Network/virtualNetworks/DevOps-NetworkV2'
 
 @description('Optional. The Public IP resource ID to associate to the azureBastionSubnet. If empty, then the Public IP that is created as part of this module will be applied to the azureBastionSubnet. This parameter is ignored when enablePrivateOnlyBastion is true.')
 param bastionSubnetPublicIpResourceId string = ''

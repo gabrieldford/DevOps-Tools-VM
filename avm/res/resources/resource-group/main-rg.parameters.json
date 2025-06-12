@@ -3,7 +3,7 @@
   "contentVersion": "1.0.0.0",
   "parameters": {
     "name": {
-      "value": "DevOps-Tools"
+      "value": "DevOps-ToolsV2"
     },
     "lock": {},
     "roleAssignments": {},

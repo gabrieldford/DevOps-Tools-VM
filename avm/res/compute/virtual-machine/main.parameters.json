@@ -3,7 +3,7 @@
   "contentVersion": "1.0.0.0",
   "parameters": {
     "name": {
-      "value": "devOps-Tools"
+      "value": "devOps-Vm"
     },
     "vmSize": {
       "value": "standard_D4as_v6"
@@ -49,7 +49,7 @@
     "adminPassword": {
       "reference": {
         "keyVault": {
-          "id": "/subscriptions/58a4a8cd-3b3b-4fcc-ad44-d7bf8c3df844/resourceGroups/DevOps-Tools/providers/Microsoft.KeyVault/vaults/DevOps-gdf-KV"
+          "id": "/subscriptions/58a4a8cd-3b3b-4fcc-ad44-d7bf8c3df844/resourceGroups/DevOps-ToolsV2/providers/Microsoft.KeyVault/vaults/DevOps-gdf-Kv2"
         },
         "secretName": "DevOps-Vm-Secretv2"
       }
@@ -75,7 +75,7 @@
       "value": {
         "systemAssigned": true,
         "userAssignedResourceIds": [
-          "/subscriptions/58a4a8cd-3b3b-4fcc-ad44-d7bf8c3df844/resourcegroups/DevOps-Tools/providers/Microsoft.ManagedIdentity/userAssignedIdentities/devOps-ToolsVm-identity"
+          "/subscriptions/58a4a8cd-3b3b-4fcc-ad44-d7bf8c3df844/resourcegroups/DevOps-ToolsV2/providers/Microsoft.ManagedIdentity/userAssignedIdentities/devOps-ToolsVm-identityV2"
         ]
       }
     },
@@ -108,7 +108,7 @@
             {
               "name": "ipconfig1",
               "privateIPAllocationMethod": "Dynamic",
-              "subnetResourceId": "/subscriptions/58a4a8cd-3b3b-4fcc-ad44-d7bf8c3df844/resourceGroups/DevOps-Tools/providers/Microsoft.Network/virtualNetworks/DevOps-Network/subnets/DevSubnet",
+              "subnetResourceId": "/subscriptions/58a4a8cd-3b3b-4fcc-ad44-d7bf8c3df844/resourceGroups/DevOps-ToolsV2/providers/Microsoft.Network/virtualNetworks/DevOps-NetworkV2/subnets/DevSubnet",
               "privateIPAddressVersion": "IPv4",
               "primary": true
             }
@@ -154,6 +154,11 @@
       }
     },
     "extensionAntiMalwareConfig":{
+      "value": {
+        "enabled": false
+      }
+    },
+    "extensionNetworkWatcherAgentConfig":{
       "value": {
         "enabled": false
       }

@@ -152,7 +152,7 @@ param maintenanceConfigurationResourceId string = ''
 
 // Child resources
 @description('Optional. Specifies whether extension operations should be allowed on the virtual machine. This may only be set to False when no extensions are present on the virtual machine.')
-param allowExtensionOperations bool = true
+param allowExtensionOperations bool = false
 
 @description('Optional. Required if name is specified. Password of the user specified in user parameter.')
 @secure()
@@ -184,9 +184,7 @@ param extensionDependencyAgentConfig object = {
 }
 
 @description('Optional. The configuration for the [Network Watcher Agent] extension. Must at least contain the ["enabled": true] property to be executed.')
-param extensionNetworkWatcherAgentConfig object = {
-  enabled: false
-}
+param extensionNetworkWatcherAgentConfig object
 
 @description('Optional. The configuration for the [Azure Disk Encryption] extension. Must at least contain the ["enabled": true] property to be executed. Restrictions: Cannot be enabled on disks that have encryption at host enabled. Managed disks encrypted using Azure Disk Encryption cannot be encrypted using customer-managed keys.')
 param extensionAzureDiskEncryptionConfig object = {

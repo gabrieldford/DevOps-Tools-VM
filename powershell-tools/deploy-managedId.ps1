@@ -1,8 +1,6 @@
-# This is a PowerShell script to deploy a Bicep template for a Bastion host in Azure.
 # Define reusable variables
-$deploymentName = "DevOpsBastionDeployment"
-$templateFile = "c:\Dev-Environment\Devops-Tools-VM\avm\res\network\bastion-host\devops-bastion.bicep"
-# $parametersFile = "c:\Dev-Environment\bicep-registry-modules\avm\res\network\virtual-network\main-vnet.parameters.json"
+$deploymentName = "DevOpsManagedIdDeployment"
+$templateFile = "c:\Dev-Environment\Devops-Tools-VM\avm\res\managed-identity\user-assigned-identity\devopsTools-mi.bicep"
 $resourceGroupName = "DevOps-ToolsV2"
 $deploymentLocation = "eastus"
 $subscriptionId = "58a4a8cd-3b3b-4fcc-ad44-d7bf8c3df844" # Replace with your subscription ID
@@ -16,5 +14,5 @@ New-AzResourceGroupDeployment `
   -Name $deploymentName `
   -ResourceGroupName $resourceGroupName `
   -Location $deploymentLocation `
-  -TemplateFile $templateFile `
- # -TemplateParameterFile $parametersFile
+  -TemplateFile $templateFile 
+ 
