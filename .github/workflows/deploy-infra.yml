@@ -25,3 +25,4 @@ jobs:
             parameters: ./resources/resource-group/main-rg.parameters.json
             deploymentName: 'main-rg-deployment'
 
+
