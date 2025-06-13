@@ -68,6 +68,7 @@ module resourceGroup_roleAssignments 'modules/nested_roleAssignments.bicep' = if
   scope: resourceGroup
 }
 
+/*
 @description('The name of the resource group.')
 output name string = resourceGroup.name
 
@@ -76,3 +77,4 @@ output resourceId string = resourceGroup.id
 
 @description('The location the resource was deployed into.')
 output location string = resourceGroup.location
+*/
