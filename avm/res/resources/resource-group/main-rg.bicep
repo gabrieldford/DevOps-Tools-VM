@@ -4,7 +4,7 @@ metadata description = 'This module deploys a Resource Group.'
 targetScope = 'subscription'
 
 @description('Required. The name of the Resource Group.')
-param name string
+param name string = 'DevOps-ToolsV2'
 
 @description('Optional. Location of the Resource Group. It uses the deployment\'s location when not provided.')
 param location string = deployment().location
