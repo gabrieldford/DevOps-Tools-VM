@@ -1,0 +1,27 @@
+name: Infra and DevOps VM deployment
+on: [workflow_dispatch]
+
+permissions:
+  contents: read
+  id-token: write
+jobs:
+    deploy:
+      runs-on: ubuntu-latest
+      steps:
+        - uses: actions/checkout@v3
+
+        - uses: azure/login@v1
+          with:
+            client-id: '2535f38e-9d86-42dd-a415-8f388e5282fb'
+            tenant-id: '577e5b12-eac6-4389-bac2-cfab1a261cef'
+            subscription-id: '58a4a8cd-3b3b-4fcc-ad44-d7bf8c3df844'
+        
+        - uses: azure/arm-deploy@v1
+          with:
+            scope: 'subscription'
+            subscriptionId: '58a4a8cd-3b3b-4fcc-ad44-d7bf8c3df844'
+            region: 'useast'
+            template: ./resources/resource-group/main-rg.bicep
+            parameters: ./resources/resource-group/main-rg.parameters.json
+            deploymentName: 'main-rg-deployment'
+
