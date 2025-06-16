@@ -5,7 +5,8 @@ permissions:
   contents: read
   id-token: write
 jobs:
-    deploy:
+    deploy-rg:
+      name: Deploy Resource Group using Bicep
       runs-on: ubuntu-latest
       steps:
         - uses: actions/checkout@v3
@@ -16,11 +17,31 @@ jobs:
             tenant-id: '577e5b12-eac6-4389-bac2-cfab1a261cef'
             subscription-id: '58a4a8cd-3b3b-4fcc-ad44-d7bf8c3df844'
         
-
         - name: Deploy Bicep template to subscription
           run: |
             az deployment sub create \
               --name deploy-rg-module \
               --location eastus \
               --template-file ./avm/res/resources/resource-group/main-rg.bicep \
+              --only-show-errors
+    deploy-Vnet:
+      name: Deploy VNet using Bicep
+      runs-on: ubuntu-latest
+      needs: deploy-rg
+      steps:
+        - uses: actions/checkout@v3
+
+        - uses: azure/login@v1
+          with:
+            client-id: ${{ secrets.AZURE_CLIENT_ID }}
+            tenant-id: ${{ secrets.AZURE_TENANT_ID }}
+            subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+        
+        - name: Deploy Bicep template to subscription
+          run: |
+            az deployment sub create \
+              --name deploy-vnet-module \
+              --location eastus \
+              --template-file ./avm/res/network/virtual-network/main-vnet.bicep \
+              --template-parameter-file ./avm/res/network/virtual-network/main-vnet.parameters.json \
               --only-show-errors
