@@ -39,7 +39,7 @@ jobs:
         
         - name: Deploy Vnet using BICEP
           run: |
-            az deployment create \
+            az deployment group create \
               --name deploy-vnet-module \
               --resource-group "DevOps-ToolsV2" \
               --location eastus \
