@@ -45,3 +45,26 @@ jobs:
               --template-file ./avm/res/network/virtual-network/main-vnet.bicep \
               --parameters @./avm/res/network/virtual-network/main-vnet.parameters.json \
               --only-show-errors
+    
+    deploy-Managed-Identity:
+      name: Deploy Managed Identity using Bicep
+      runs-on: ubuntu-latest
+      needs: deploy-Vnet
+      steps:
+        - uses: actions/checkout@v3
+
+        - uses: azure/login@v1
+          with:
+            client-id: ${{ secrets.AZURE_CLIENT_ID }}
+            tenant-id: ${{ secrets.AZURE_TENANT_ID }}
+            subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+        
+        - name: Deploy Managed Identity using BICEP
+          run: |
+            az deployment group create \
+              --name deploy-managed-identity-module \
+              --resource-group "DevOps-ToolsV2" \
+              --template-file ./avm/res/managed-identity/user-assigned-identity/devopsTools.bicep \
+              --only-show-errors
+  
+    
