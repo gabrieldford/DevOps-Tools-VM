@@ -41,6 +41,7 @@ jobs:
           run: |
             az deployment create \
               --name deploy-vnet-module \
+              --resource-group "DevOps-ToolsV2" \
               --location eastus \
               --template-file ./avm/res/network/virtual-network/main-vnet.bicep \
               --parameters @./avm/res/network/virtual-network/main-vnet.parameters.json \
