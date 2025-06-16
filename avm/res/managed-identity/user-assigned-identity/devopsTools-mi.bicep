@@ -2,7 +2,7 @@ metadata name = 'User Assigned Identities'
 metadata description = 'This module deploys a User Assigned Identity.'
 
 @description('Required. Name of the User Assigned Identity.')
-param name string //= 'devOps-ToolsVm-identityV2'
+param miName string //= 'devOps-ToolsVm-identityV2'
 
 @description('Optional. Location for all resources.')
 param location string = resourceGroup().location
@@ -77,13 +77,13 @@ resource avmTelemetry 'Microsoft.Resources/deployments@2024-03-01' = if (enableT
 }
 
 resource userAssignedIdentity 'Microsoft.ManagedIdentity/userAssignedIdentities@2024-11-30' = {
-  name: name
+  name: miName
   location: location
   tags: tags
 }
 
 resource userAssignedIdentity_lock 'Microsoft.Authorization/locks@2020-05-01' = if (!empty(lock ?? {}) && lock.?kind != 'None') {
-  name: lock.?name ?? 'lock-${name}'
+  name: lock.?name ?? 'lock-${miName}'
   properties: {
     level: lock.?kind ?? ''
     notes: lock.?kind == 'CanNotDelete'
@@ -128,7 +128,7 @@ resource userAssignedIdentity_roleAssignments 'Microsoft.Authorization/roleAssig
 ]
 
 @description('The name of the user assigned identity.')
-output name string = userAssignedIdentity.name
+output miName string = userAssignedIdentity.name
 
 @description('The resource ID of the user assigned identity.')
 output resourceId string = userAssignedIdentity.id

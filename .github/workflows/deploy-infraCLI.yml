@@ -69,7 +69,7 @@ jobs:
               --name deploy-managed-identity-module \
               --resource-group ${{ env.RESOURCE_GROUP_NAME }} \
               --template-file ./avm/res/managed-identity/user-assigned-identity/devopsTools-mi.bicep \
-              --parameters Name=${{ env.MANAGED_IDENTITY_NAME }} \
+              --parameters miName=${{ env.MANAGED_IDENTITY_NAME }} \
               --only-show-errors
   
     deploy-KV:
