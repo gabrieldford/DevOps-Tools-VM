@@ -88,6 +88,6 @@ jobs:
             az deployment group create \
               --name deploy-kv-module \
               --resource-group ${{ env.RESOURCE_GROUP_NAME }} \
-              --template-file ./avm/res/key-vault/devops-kv.bicep \
+              --template-file ./avm/res/key-vault/vault/devops-kv.bicep \
               --only-show-errors          
     
