@@ -37,11 +37,11 @@ jobs:
             tenant-id: ${{ secrets.AZURE_TENANT_ID }}
             subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
         
-        - name: Deploy Bicep template to subscription
+        - name: Deploy Vnet using BICEP
           run: |
             az deployment sub create \
               --name deploy-vnet-module \
               --location eastus \
               --template-file ./avm/res/network/virtual-network/main-vnet.bicep \
-              --template-parameter-file ./avm/res/network/virtual-network/main-vnet.parameters.json \
+              --parameters @./avm/res/network/virtual-network/main-vnet.parameters.json \
               --only-show-errors
