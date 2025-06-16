@@ -2,7 +2,7 @@ metadata name = 'User Assigned Identities'
 metadata description = 'This module deploys a User Assigned Identity.'
 
 @description('Required. Name of the User Assigned Identity.')
-param name string = 'devOps-ToolsVm-identityV2'
+param name string //= 'devOps-ToolsVm-identityV2'
 
 @description('Optional. Location for all resources.')
 param location string = resourceGroup().location

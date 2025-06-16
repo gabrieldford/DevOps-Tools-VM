@@ -4,6 +4,7 @@ on: [workflow_dispatch]
 env: 
   RESOURCE_GROUP_NAME: DevOps-ToolsV2
   LOCATION: eastus
+  MANAGED_IDENTITY_NAME: devOps-ToolsVm-identityV2
 permissions:
   contents: read
   id-token: write
@@ -68,6 +69,7 @@ jobs:
               --name deploy-managed-identity-module \
               --resource-group ${{ env.RESOURCE_GROUP_NAME }} \
               --template-file ./avm/res/managed-identity/user-assigned-identity/devopsTools-mi.bicep \
+              --parameters Name=${{ env.MANAGED_IDENTITY_NAME }} \
               --only-show-errors
   
     deploy-KV:
@@ -83,11 +85,18 @@ jobs:
             tenant-id: ${{ secrets.AZURE_TENANT_ID }}
             subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
         
+        - name: Get Managed Identity Object ID
+          id: get-mi-object-id
+          shell: pwsh
+          run: |
+            $mi = Get-AzUserAssignedIdentity -ResourceGroupName ${{ env.RESOURCE_GROUP_NAME }} -Name ${{ env.MANAGED_IDENTITY_NAME }}
+            echo "objectId=${mi.Id}" >> $GITHUB_OUTPUT
         - name: Deploy Key Vault using BICEP
           run: |
             az deployment group create \
               --name deploy-kv-module \
               --resource-group ${{ env.RESOURCE_GROUP_NAME }} \
               --template-file ./avm/res/key-vault/vault/devops-kv.bicep \
+              --paramter mMiPrincipalId=${{ steps.get-mi-object-id.outputs.objectId }} \
               --only-show-errors          
     
