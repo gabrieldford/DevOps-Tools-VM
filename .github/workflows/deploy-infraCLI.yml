@@ -39,7 +39,7 @@ jobs:
         
         - name: Deploy Vnet using BICEP
           run: |
-            az deployment sub create \
+            az deployment create \
               --name deploy-vnet-module \
               --location eastus \
               --template-file ./avm/res/network/virtual-network/main-vnet.bicep \
