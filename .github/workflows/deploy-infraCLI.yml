@@ -1,6 +1,9 @@
 name: Infra and DevOps VM deployment using CLI
 on: [workflow_dispatch]
 
+env: 
+  RESOURCE_GROUP_NAME: DevOps-ToolsV2
+  LOCATION: eastus
 permissions:
   contents: read
   id-token: write
@@ -63,8 +66,8 @@ jobs:
           run: |
             az deployment group create \
               --name deploy-managed-identity-module \
-              --resource-group "DevOps-ToolsV2" \
-              --template-file ./avm/res/managed-identity/user-assigned-identity/devopsTools.bicep \
+              --resource-group ${{ env.RESOURCE_GROUP_NAME }} \
+              --template-file ./avm/res/managed-identity/user-assigned-identity/devopsTools-mi.bicep \
               --only-show-errors
   
     
