@@ -24,14 +24,28 @@ jobs:
             tenant-id: ${{ secrets.AZURE_TENANT_ID }}
             subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}        
    
-        - uses : azure/powershell@v1
-          name: Deploy Key Vault using BICEP
-          with:
-            inlineScript: |
-              Connect-AzAccount -Identity 
-                  
-              New-AzResourceGroupDeployment `
-                -ResourceGroupName $env:RESOURCE_GROUP_NAME `
-                -TemplateFile ./avm/res/key-vault/vault/devops-kv.bicep `
-                -Verbose
-            azPSVersion: "latest"
+        - name: Deploy Key Vault using PowerShell (reuse OIDC token)
+          shell: pwsh
+          run: |
+            $ErrorActionPreference = "Stop"
+
+            # Get access token from CLI login
+            $token = az account get-access-token --query accessToken -o tsv
+            $accountId = "${{ secrets.AZURE_CLIENT_ID }}"
+            $tenantId = "${{ secrets.AZURE_TENANT_ID }}"
+            $subscriptionId = "${{ secrets.AZURE_SUBSCRIPTION_ID }}"
+
+            # Authenticate PowerShell using the CLI token
+            Connect-AzAccount `
+              -AccessToken $token `
+              -AccountId $accountId `
+              -TenantId $tenantId `
+              -SubscriptionId $subscriptionId
+
+             # Now deploy
+             New-AzResourceGroupDeployment `
+               -Name 'deploy-kv-module' `
+               -ResourceGroupName $env:RESOURCE_GROUP_NAME `
+               -TemplateFile './avm/res/key-vault/vault/devops-kv.bicep' `
+               -Location $env:LOCATION `
+               -Verbose
