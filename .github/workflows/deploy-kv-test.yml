@@ -26,19 +26,20 @@ jobs:
           id: get-mi
           shell: bash
           run: |
+            echo "Fetching identity..."
+            az identity show \
+              --resource-group "${{ env.RESOURCE_GROUP_NAME }}" \
+              --name "${{ env.MANAGED_IDENTITY_NAME }}" \
+              --output json
+
+            echo "Attempting to query principalId..."
             objectId=$(az identity show \
               --resource-group "${{ env.RESOURCE_GROUP_NAME }}" \
               --name "${{ env.MANAGED_IDENTITY_NAME }}" \
               --query principalId \
               --output tsv)
 
-            echo "::set-output name=objectId::$objectId"
-        - name: Deploy Key Vault using BICEP
-          run: |
-            az deployment group create \
-              --name deploy-kv-module \
-              --resource-group ${{ env.RESOURCE_GROUP_NAME }} \
-              --template-file ./avm/res/key-vault/vault/devops-kv.bicep \
-              --parameters vmMiPrincipalId=${{ steps.get-mi.outputs.objectId }} \
-              --only-show-errors          
+            echo "Managed Identity ObjectId: $objectId"
+            echo "objectId=$objectId" >> "$GITHUB_OUTPUT"
+
     
