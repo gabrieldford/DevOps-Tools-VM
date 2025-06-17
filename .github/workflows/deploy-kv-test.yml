@@ -31,6 +31,5 @@ jobs:
               --name deploy-kv-module \
               --resource-group ${{ env.RESOURCE_GROUP_NAME }} \
               --template-file ./avm/res/key-vault/vault/devops-kv.bicep \
-              --parameters vmMiPrincipalId="8f9f7624-eb16-46f7-aaef-79eb06c286db" \
               --only-show-errors          
-    
+   
