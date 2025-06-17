@@ -23,30 +23,9 @@ jobs:
             client-id: ${{ secrets.AZURE_CLIENT_ID }}
             tenant-id: ${{ secrets.AZURE_TENANT_ID }}
             subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
-        
-        - name: Get Managed Identity Object ID (CLI)
-          id: get-mi
-          shell: bash
-          run: |
-            echo "Fetching identity..."
-            az identity show \
-              --resource-group "${{ env.RESOURCE_GROUP_NAME }}" \
-              --name "${{ env.MANAGED_IDENTITY_NAME }}" \
-              --output json
-          
-            miobjectId=$(az identity show \
-              --resource-group "${{ env.RESOURCE_GROUP_NAME }}" \
-              --name "${{ env.MANAGED_IDENTITY_NAME }}" \
-              --query principalId \
-              --output tsv)
-           
-            echo "Managed Identity ObjectId: $miobjectId"
-            echo "objectId=$miobjectId" >> "$GITHUB_OUTPUT"
         - name: Deploy Key Vault using BICEP
           run: |
-            echo "Deploying Key Vault with Managed Identity Object ID: ${{ steps.get-mi.outputs.objectId }}"  
-            principalId="${{ steps.get-mi.outputs.objectId }}"
-            echo "Principal ID: $principalId"
+
 
             az deployment group create \
               --name deploy-kv-module \
