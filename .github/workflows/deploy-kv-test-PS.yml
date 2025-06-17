@@ -1,0 +1,36 @@
+name: Testing Key Vault Deployment using azure pwoershell user
+on: 
+  workflow_dispatch:
+  push:
+    branches: [main]
+env: 
+  RESOURCE_GROUP_NAME: DevOps-ToolsV2
+  LOCATION: eastus
+  MANAGED_IDENTITY_NAME: devOps-ToolsVm-identityV2
+permissions:
+  contents: read
+  id-token: write
+jobs:
+      
+    deploy-KV:
+      name: Deploy Key Vault using Bicep
+      runs-on: ubuntu-latest
+      steps:
+        - uses: actions/checkout@v3
+
+        - uses: azure/login@v1
+          with:
+            client-id: ${{ secrets.AZURE_CLIENT_ID }}
+            tenant-id: ${{ secrets.AZURE_TENANT_ID }}
+            subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}        
+   
+        - uses : azure/powershell@v1
+          name: Deploy Key Vault using BICEP
+          with:
+            inlineScript: |
+              New-AzResourceGroupDeployment `
+                -ResourceGroupName ${{ env.RESOURCE_GROUP_NAME }} `
+                -TemplateFile ./avm/res/key-vault/vault/devops-kv.bicep `
+                -Location ${{ env.LOCATION }} `
+                -Verbose
+            azPSVersion: "latest"

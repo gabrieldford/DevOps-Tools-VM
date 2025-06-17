@@ -1,8 +1,5 @@
 name: Testing Key Vault Deployment
-on: 
-  workflow_dispatch:
-  push:
-    branches: [main]
+on: [workflow_dispatch]
 env: 
   RESOURCE_GROUP_NAME: DevOps-ToolsV2
   LOCATION: eastus
@@ -25,8 +22,6 @@ jobs:
             subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
         - name: Deploy Key Vault using BICEP
           run: |
-
-
             az deployment group create \
               --name deploy-kv-module \
               --resource-group ${{ env.RESOURCE_GROUP_NAME }} \

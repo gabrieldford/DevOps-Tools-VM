@@ -1,0 +1,7 @@
+az login --subscription 58a4a8cd-3b3b-4fcc-ad44-d7bf8c3df844
+
+az deployment group create \
+  --name deploy-kv-module \
+  --resource-group DevOps-ToolsV2 \
+  --template-file ./avm/res/key-vault/vault/devops-kv.bicep \
+  --only-show-errors
