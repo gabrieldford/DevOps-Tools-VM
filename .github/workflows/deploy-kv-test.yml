@@ -32,7 +32,7 @@ jobs:
               --query principalId \
               --output tsv)
 
-            echo "objectId=$objectId" >> "$GITHUB_OUTPUT"
+            echo "::set-output name=objectId::$objectId"
         - name: Deploy Key Vault using BICEP
           run: |
             az deployment group create \
