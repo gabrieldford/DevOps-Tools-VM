@@ -45,7 +45,7 @@ jobs:
         - name: Deploy Key Vault using BICEP
           run: |
             echo "Deploying Key Vault with Managed Identity Object ID: ${{ steps.get-mi.outputs.objectId }}"  
-            $principalId = "${{ steps.get-mi.outputs.objectId }}"
+            principalId = "${{ steps.get-mi.outputs.objectId }}"
             echo "Principal ID: $principalId"
 
             az deployment group create \
