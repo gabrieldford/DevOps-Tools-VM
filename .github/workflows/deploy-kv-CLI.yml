@@ -1,4 +1,4 @@
-name: Testing Key Vault Deployment
+name: Testing Key Vault Deployment using CLI
 on: [workflow_dispatch]
 env: 
   RESOURCE_GROUP_NAME: DevOps-ToolsV2
@@ -23,8 +23,8 @@ jobs:
         - name: Deploy Key Vault using BICEP
           run: |
             az deployment group create \
-              --name deploy-kv-module \
-              --resource-group ${{ env.RESOURCE_GROUP_NAME }} \
+              --name kvDeployment \
+              --resource-group $RESOURCE_GROUP_NAME \
               --template-file ./avm/res/key-vault/vault/devops-kv.bicep \
               --only-show-errors          
    
