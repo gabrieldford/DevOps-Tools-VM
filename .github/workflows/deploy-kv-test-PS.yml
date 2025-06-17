@@ -28,9 +28,10 @@ jobs:
           name: Deploy Key Vault using BICEP
           with:
             inlineScript: |
+              Connect-AzAccount -Identity 
+                  
               New-AzResourceGroupDeployment `
-                -ResourceGroupName ${{ env.RESOURCE_GROUP_NAME }} `
+                -ResourceGroupName $env:RESOURCE_GROUP_NAME `
                 -TemplateFile ./avm/res/key-vault/vault/devops-kv.bicep `
-                -Location ${{ env.LOCATION }} `
                 -Verbose
             azPSVersion: "latest"
