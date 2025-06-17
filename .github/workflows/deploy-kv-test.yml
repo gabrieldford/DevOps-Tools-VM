@@ -32,13 +32,14 @@ jobs:
               --name "${{ env.MANAGED_IDENTITY_NAME }}" \
               --output json
           
-            objectId=$(az identity show \
+            miobjectId=$(az identity show \
               --resource-group "${{ env.RESOURCE_GROUP_NAME }}" \
               --name "${{ env.MANAGED_IDENTITY_NAME }}" \
               --query principalId \
               --output tsv)
-
-            echo "objectId=$objectId" >> "$GITHUB_OUTPUT"
+           
+            echo "Managed Identity ObjectId: $objectId"
+            echo "objectId=$miobjectId" >> "$GITHUB_OUTPUT"
         - name: Deploy Key Vault using BICEP
           shell: bash
           run: |
