@@ -1,4 +1,4 @@
-name: Infra and DevOps VM deployment using CLI
+name: Testing Key Vault Deployment
 on: [workflow_dispatch]
 
 env: 
