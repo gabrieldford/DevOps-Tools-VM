@@ -1,4 +1,4 @@
-name: Testing Key Vault Deployment
+name: Testing Key Vault Deployment Output
 on: [workflow_dispatch]
 
 env: 
