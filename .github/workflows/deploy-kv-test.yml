@@ -1,6 +1,8 @@
 name: Testing Key Vault Deployment
-on: [workflow_dispatch]
-
+on: 
+  workflow_dispatch:
+  push:
+    branches: [main]
 env: 
   RESOURCE_GROUP_NAME: DevOps-ToolsV2
   LOCATION: eastus
