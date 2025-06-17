@@ -45,11 +45,13 @@ jobs:
         - name: Deploy Key Vault using BICEP
           run: |
             echo "Deploying Key Vault with Managed Identity Object ID: ${{ steps.get-mi.outputs.objectId }}"  
+            $principalId = "${{ steps.get-mi.outputs.objectId }}"
+            echo "Principal ID: $principalId"
 
             az deployment group create \
               --name deploy-kv-module \
               --resource-group ${{ env.RESOURCE_GROUP_NAME }} \
               --template-file ./avm/res/key-vault/vault/devops-kv.bicep \
-              --parameters "{ \"vmMiPrincipalId\": \"${{ steps.get-mi.outputs.objectId }}\" }" \
+              --parameters vmMiPrincipalId="$principalId" \
               --only-show-errors          
     
