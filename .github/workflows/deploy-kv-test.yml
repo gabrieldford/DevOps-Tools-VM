@@ -50,6 +50,6 @@ jobs:
               --name deploy-kv-module \
               --resource-group ${{ env.RESOURCE_GROUP_NAME }} \
               --template-file ./avm/res/key-vault/vault/devops-kv.bicep \
-              --parameters vmMiPrincipalId=${{ steps.get-mi.outputs.objectId }} \
+              --parameters "{ \"vmMiPrincipalId\": \"${{ steps.get-mi.outputs.objectId }}\" }" \
               --only-show-errors          
     
