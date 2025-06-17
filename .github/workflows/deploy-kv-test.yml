@@ -41,7 +41,6 @@ jobs:
             echo "Managed Identity ObjectId: $miobjectId"
             echo "objectId=$miobjectId" >> "$GITHUB_OUTPUT"
         - name: Deploy Key Vault using BICEP
-          shell: bash
           run: |
             az deployment group create \
               --name deploy-kv-module \
