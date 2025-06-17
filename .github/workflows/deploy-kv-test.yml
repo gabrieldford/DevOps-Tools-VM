@@ -44,6 +44,8 @@ jobs:
             echo "objectId=$miobjectId" >> "$GITHUB_OUTPUT"
         - name: Deploy Key Vault using BICEP
           run: |
+            echo "Deploying Key Vault with Managed Identity Object ID: ${{ steps.get-mi.outputs.objectId }}"  
+
             az deployment group create \
               --name deploy-kv-module \
               --resource-group ${{ env.RESOURCE_GROUP_NAME }} \
