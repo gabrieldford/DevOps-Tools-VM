@@ -38,7 +38,7 @@ jobs:
               --query principalId \
               --output tsv)
            
-            echo "Managed Identity ObjectId: $objectId"
+            echo "Managed Identity ObjectId: $miobjectId"
             echo "objectId=$miobjectId" >> "$GITHUB_OUTPUT"
         - name: Deploy Key Vault using BICEP
           shell: bash
