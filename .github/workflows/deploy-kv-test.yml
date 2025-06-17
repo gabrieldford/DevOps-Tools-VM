@@ -24,14 +24,15 @@ jobs:
         
         - name: Get Managed Identity Object ID (CLI)
           id: get-mi
+          shell: bash
           run: |
             objectId=$(az identity show \
-              --resource-group ${{ env.RESOURCE_GROUP_NAME }} \
-              --name ${{ env.MANAGED_IDENTITY_NAME }} \
+              --resource-group "${{ env.RESOURCE_GROUP_NAME }}" \
+              --name "${{ env.MANAGED_IDENTITY_NAME }}" \
               --query principalId \
               --output tsv)
 
-            echo "objectId=$objectId" >> $GITHUB_OUTPUT
+            echo "objectId=$objectId" >> "$GITHUB_OUTPUT"
         - name: Deploy Key Vault using BICEP
           run: |
             az deployment group create \
