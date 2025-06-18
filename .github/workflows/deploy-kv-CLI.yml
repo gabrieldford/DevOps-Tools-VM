@@ -35,7 +35,7 @@ jobs:
                       "value": "N3xtStp1saKyV@ult!",
                       "tags": {
                         "created-by": "GitHub Actions",
-                        "created-on": "$(date -u +%Y-%m-%dT%H:%M:%SZ)",
+                        "created-on": "18-06-2025",
                         "kv-purpose": "Secret for DevOps VM"
                       },
                       "attributes": {
