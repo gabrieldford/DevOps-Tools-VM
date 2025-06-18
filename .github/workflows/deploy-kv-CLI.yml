@@ -26,7 +26,9 @@ jobs:
               --name kvDeployment \
               --resource-group $RESOURCE_GROUP_NAME \
               --template-file ./avm/res/key-vault/vault/devops-kv2.bicep \
-              --parameters secrets='[
+              --only-show-errors \
+              --parameters \
+                secrets='[
                   {
                     "name": "DevOps-Vm-Secretv2",
                     "value": "N3xtStp1saKyV@ult!",
@@ -40,7 +42,7 @@ jobs:
                     }
                   }
                 ]' \
-                rolesAssignments='[
+                roleAssignments='[
                   {
                     "roleDefinitionName": "Key Vault Secrets User",
                     "principalId": "8f9f7624-eb16-46f7-aaef-79eb06c286db",
@@ -50,10 +52,9 @@ jobs:
                   {
                     "roleDefinitionName": "Key Vault Administrator",
                     "principalId": "75e8c793-8646-411a-b342-7a1a4c53620d",
-                    "description": "Gabriel's User Identity.",
-                    "principalType": "User"
+                      "description": "Gabriel's User Identity.",
+                  "principalType": "User"
                   }
                 ]' \
-                vmMiPrincipalId='8f9f7624-eb16-46f7-aaef-79eb06c286db' \
-            --only-show-errors          
-   
+                vmMiPrincipalId='8f9f7624-eb16-46f7-aaef-79eb06c286db'
+          
