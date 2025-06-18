@@ -34,11 +34,11 @@ jobs:
                       "created-by": "Gabriel",
                       "created-on": "2025-06-18",
                       "kv-purpose": "Secret for DevOps VM"
-                  },
-                  "attributes": {
-                    "enabled": true
+                    },
+                    "attributes": {
+                      "enabled": true
+                    }
                   }
-                 }
                 ]' \
                 rolesAssignments='[
                   {
@@ -54,6 +54,6 @@ jobs:
                     "principalType": "User"
                   }
                 ]' \
-                vmMiPrincipalId='8f9f7624-eb16-46f7-aaef-79eb06c286db' \ 
+                vmMiPrincipalId='8f9f7624-eb16-46f7-aaef-79eb06c286db' \
             --only-show-errors          
    
