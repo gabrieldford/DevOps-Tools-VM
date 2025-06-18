@@ -68,6 +68,8 @@ jobs:
             parameters = $parameters
           } | ConvertTo-Json -Depth 10 | Out-File -FilePath kv.parameters.json -Encoding utf8
 
+      - name: Display Key Vault parameters
+        run: cat kv.parameters.json
       - name: Deploy Key Vault using BICEP
         run: |
           az deployment group create \
