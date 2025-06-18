@@ -1,0 +1,38 @@
+{
+  "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentParameters.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+    "secrets": {
+      "value": [
+        {
+          "name": "DevOps-Vm-Secretv3",
+          "value": "N3xtStp1saKyV@ult!",
+          "attributes": {
+            "enabled": true
+          },
+          "tags": {
+            "created-on": "2025-06-18",
+            "created-by": "GitHub Actions",
+            "kv-purpose": "Secret for DevOps VM"
+          }
+        }
+      ]
+    },
+    "roleAssignments": {
+      "value": [
+        {
+          "principalType": "ServicePrincipal",
+          "description": "DevOps VM Identity",
+          "roleDefinitionIdOrName": "Key Vault Secrets User",
+          "principalId": "8f9f7624-eb16-46f7-aaef-79eb06c286db"
+        },
+        {
+          "principalType": "User",
+          "description": "Gabriel's User Identity",
+          "roleDefinitionIdOrName": "Key Vault Administrator",
+          "principalId": "75e8c793-8646-411a-b342-7a1a4c53620d"
+        }
+      ]
+    }
+  }
+}

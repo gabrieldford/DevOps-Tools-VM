@@ -9,10 +9,7 @@ metadata description = 'This module deploys a Key Vault.'
 // ================ //
 @description('Required. Name of the Key Vault. Must be globally unique.')
 @maxLength(24)
-param name string = 'DevOps-gdf-Kv2'
-
-@description('The principal Id of the VM. Passed in from the powershell deployment script.')
-param vmMiPrincipalId string 
+param name string = 'DevOps-gdf-Kv4'
 
 @description('Optional. Location for all resources.')
 param location string = resourceGroup().location
