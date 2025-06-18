@@ -52,8 +52,8 @@ jobs:
                   {
                     "roleDefinitionName": "Key Vault Administrator",
                     "principalId": "75e8c793-8646-411a-b342-7a1a4c53620d",
-                      "description": "Gabriel's User Identity.",
-                  "principalType": "User"
+                    "description": "Gabriel's User Identity.",
+                    "principalType": "User"
                   }
                 ]' \
                 vmMiPrincipalId='8f9f7624-eb16-46f7-aaef-79eb06c286db'
