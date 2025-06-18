@@ -1,0 +1,22 @@
+name: Test KV Deploy
+
+on: [workflow_dispatch]
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Write param file
+        run: |
+          cat <<EOF > test.json
+{
+  "parameters": {
+    "name": {
+      "value": "test"
+    }
+  }
+}
+EOF
+
+      - name: Display param file
+        run: cat test.json
