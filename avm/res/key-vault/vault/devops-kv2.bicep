@@ -18,7 +18,7 @@ param location string = resourceGroup().location
 param accessPolicies accessPolicyType[]?
 
 @description('Optional. All secrets to create.')
-param secrets secretType []
+param secrets secretType []?
 
 @description('Optional. All keys to create.')
 param keys keyType[]?
@@ -71,7 +71,7 @@ param lock lockType?
 
 import { roleAssignmentType } from 'br/public:avm/utl/types/avm-common-types:0.5.1'
 @description('Optional. Array of role assignments to create.')
-param roleAssignments roleAssignmentType[]
+param roleAssignments roleAssignmentType[]?
 
 import { privateEndpointSingleServiceType } from 'br/public:avm/utl/types/avm-common-types:0.5.1'
 @description('Optional. Configuration details for private endpoints. For security reasons, it is recommended to use private endpoints whenever possible.')
