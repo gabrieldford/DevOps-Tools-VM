@@ -21,41 +21,51 @@ jobs:
             tenant-id: ${{ secrets.AZURE_TENANT_ID }}
             subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
 
-        - name: Create Key Vault parameters file
+        - name: Create Key Vault parameter file
           run: |
             cat <<EOF > kv.parameters.json
             {
-              "secrets": [
-                {
-                  "name": "DevOps-Vm-Secretv2",
-                  "value": "N3xtStp1saKyV@ult!",
-                  "tags": {
-                    "created-by": "Gabriel",
-                    "created-on": "2025-06-18",
-                    "kv-purpose": "Secret for DevOps VM"
-                  },
-                  "attributes": {
-                    "enabled": true
-                  }
-                }
-              ],
-              "roleAssignments": [
-                {
-                  "roleDefinitionName": "Key Vault Secrets User",
-                  "principalId": "8f9f7624-eb16-46f7-aaef-79eb06c286db",
-                  "description": "DevOps VM Identity.",
-                  "principalType": "ServicePrincipal"
+              "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentParameters.json#",
+              "contentVersion": "1.0.0.0",
+              "parameters": {
+                "secrets": {
+                  "value": [
+                    {
+                      "name": "DevOps-Vm-Secretv2",
+                      "value": "N3xtStp1saKyV@ult!",
+                      "tags": {
+                        "created-by": "GitHub Actions",
+                        "created-on": "$(date -u +%Y-%m-%dT%H:%M:%SZ)",
+                        "kv-purpose": "Secret for DevOps VM"
+                      },
+                      "attributes": {
+                        "enabled": true
+                      }
+                    }
+                  ]
                 },
-                {
-                  "roleDefinitionName": "Key Vault Administrator",
-                  "principalId": "75e8c793-8646-411a-b342-7a1a4c53620d",
-                  "description": "Gabriel's User Identity.",
-                  "principalType": "User"
+                "roleAssignments": {
+                  "value": [
+                    {
+                      "principalId": "${VM_MI_PRINCIPAL_ID}",
+                      "roleDefinitionIdOrName": "Key Vault Secrets User",
+                      "description": "DevOps VM Identity",
+                      "principalType": "ServicePrincipal"
+                    },
+                    {
+                      "principalId": "${GABRIEL_PRINCIPAL_ID}",
+                      "roleDefinitionIdOrName": "Key Vault Administrator",
+                      "description": "Gabriel's User Identity",
+                      "principalType": "User"
+                    }
+                  ]
+                },
+                "vmMiPrincipalId": {
+                  "value": "${VM_MI_PRINCIPAL_ID}"
                 }
-              ],
-              "vmMiPrincipalId": "8f9f7624-eb16-46f7-aaef-79eb06c286db"
+              }
             }
-            EOF
+            EOF    
         - name: Deploy Key Vault using BICEP
           run: |
             az deployment group create \
