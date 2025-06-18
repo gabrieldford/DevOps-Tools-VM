@@ -33,5 +33,5 @@ jobs:
             --name kvDeployment \
             --resource-group $RESOURCE_GROUP_NAME \
             --template-file ./avm/res/key-vault/vault/devops-kv2.bicep \
-            --only-show-errors \
-            --parameters @./avm/res/key-vault/vault/devops-kv2.parameters.json 
+            --parameters @./avm/res/key-vault/vault/devops-kv2.parameters.json \
+             --only-show-errors  
