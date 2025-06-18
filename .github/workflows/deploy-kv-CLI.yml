@@ -25,51 +25,48 @@ jobs:
           tenant-id: ${{ secrets.AZURE_TENANT_ID }}
           subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
 
-      - name: Create Key Vault parameter file
+      - name: Create Key Vault parameter file using PowerShell
+        shell: pwsh
         run: |
-          cat <<EOF > kv.parameters.json
-{
-  "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentParameters.json#",
-  "contentVersion": "1.0.0.0",
-  "parameters": {
-    "secrets": {
-      "value": [
-        {
-          "name": "DevOps-Vm-Secretv2",
-          "value": "N3xtStp1saKyV@ult!",
-          "tags": {
-            "created-by": "GitHub Actions",
-            "created-on": "18-06-2025",
-            "kv-purpose": "Secret for DevOps VM"
-          },
-          "attributes": {
-            "enabled": true
+          $secrets = @(
+            @{
+              name  = "DevOps-Vm-Secretv2"
+              value = "N3xtStp1saKyV@ult!"
+              tags = @{
+                "created-by" = "GitHub Actions"
+                "created-on" = (Get-Date -Format "yyyy-MM-dd")
+                "kv-purpose" = "Secret for DevOps VM"
+              }
+              attributes = @{ enabled = $true }
+            }
+          )
+
+          $roleAssignments = @(
+            @{
+              principalId           = "8f9f7624-eb16-46f7-aaef-79eb06c286db"
+              roleDefinitionIdOrName = "Key Vault Secrets User"
+              description           = "DevOps VM Identity"
+              principalType         = "ServicePrincipal"
+            },
+            @{
+              principalId           = "75e8c793-8646-411a-b342-7a1a4c53620d"
+              roleDefinitionIdOrName = "Key Vault Administrator"
+              description           = "Gabriel's User Identity"
+              principalType         = "User"
+            }
+          )
+
+          $parameters = @{
+            secrets = @{ value = $secrets }
+            roleAssignments = @{ value = $roleAssignments }
+            vmMiPrincipalId = @{ value = "8f9f7624-eb16-46f7-aaef-79eb06c286db" }
           }
-        }
-      ]
-    },
-    "roleAssignments": {
-      "value": [
-        {
-          "principalId": "8f9f7624-eb16-46f7-aaef-79eb06c286db",
-          "roleDefinitionIdOrName": "Key Vault Secrets User",
-          "description": "DevOps VM Identity",
-          "principalType": "ServicePrincipal"
-        },
-        {
-          "principalId": "75e8c793-8646-411a-b342-7a1a4c53620d",
-          "roleDefinitionIdOrName": "Key Vault Administrator",
-          "description": "Gabriel's User Identity",
-          "principalType": "User"
-        }
-      ]
-    },
-    "vmMiPrincipalId": {
-      "value": "8f9f7624-eb16-46f7-aaef-79eb06c286db"
-    }
-  }
-}
-EOF
+
+          @{
+            '$schema' = "https://schema.management.azure.com/schemas/2019-04-01/deploymentParameters.json#"
+            contentVersion = "1.0.0.0"
+            parameters = $parameters
+          } | ConvertTo-Json -Depth 10 | Out-File -FilePath kv.parameters.json -Encoding utf8
 
       - name: Deploy Key Vault using BICEP
         run: |
