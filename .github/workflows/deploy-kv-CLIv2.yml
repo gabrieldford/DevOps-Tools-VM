@@ -1,0 +1,37 @@
+name: Testing Key Vault Deployment static Parms
+
+on: [workflow_dispatch]
+
+env: 
+  RESOURCE_GROUP_NAME: DevOps-ToolsV2
+  LOCATION: eastus
+  MANAGED_IDENTITY_NAME: devOps-ToolsVm-identityV2
+
+permissions:
+  contents: read
+  id-token: write
+
+jobs:
+  deploy-KV:
+    name: Deploy Key Vault using Bicep
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Login to Azure
+        uses: azure/login@v1
+        with:
+          client-id: ${{ secrets.AZURE_CLIENT_ID }}
+          tenant-id: ${{ secrets.AZURE_TENANT_ID }}
+          subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+
+      - name: Deploy Key Vault using BICEP
+        run: |
+          az deployment group create \
+            --name kvDeployment \
+            --resource-group $RESOURCE_GROUP_NAME \
+            --template-file ./avm/res/key-vault/vault/devops-kv2.bicep \
+            --only-show-errors \
+            --parameters @./avm/res/key-vault/vault/devops-kv2.parameters.json \
