@@ -47,13 +47,13 @@ jobs:
                 "roleAssignments": {
                   "value": [
                     {
-                      "principalId": "${VM_MI_PRINCIPAL_ID}",
+                      "principalId": "8f9f7624-eb16-46f7-aaef-79eb06c286db",
                       "roleDefinitionIdOrName": "Key Vault Secrets User",
                       "description": "DevOps VM Identity",
                       "principalType": "ServicePrincipal"
                     },
                     {
-                      "principalId": "${GABRIEL_PRINCIPAL_ID}",
+                      "principalId": "75e8c793-8646-411a-b342-7a1a4c53620d",
                       "roleDefinitionIdOrName": "Key Vault Administrator",
                       "description": "Gabriel's User Identity",
                       "principalType": "User"
@@ -61,7 +61,7 @@ jobs:
                   ]
                 },
                 "vmMiPrincipalId": {
-                  "value": "${VM_MI_PRINCIPAL_ID}"
+                  "value": "8f9f7624-eb16-46f7-aaef-79eb06c286db"
                 }
               }
             }
