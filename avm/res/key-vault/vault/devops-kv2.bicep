@@ -9,7 +9,7 @@ metadata description = 'This module deploys a Key Vault.'
 // ================ //
 @description('Required. Name of the Key Vault. Must be globally unique.')
 @maxLength(24)
-param name string = 'DevOps-gdf-Kv4'
+param name string
 
 @description('Optional. Location for all resources.')
 param location string = resourceGroup().location
