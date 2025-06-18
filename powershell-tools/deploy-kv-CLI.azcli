@@ -1,4 +1,4 @@
-az login --subscription 58a4a8cd-3b3b-4fcc-ad44-d7bf8c3df844
+51
 
 az deployment group create \
   --name deploy-kv-module \

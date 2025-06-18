@@ -1,0 +1,74 @@
+{
+  "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+    "name:": {
+      "value": "devOps-Kv"
+    },
+    "accessPolicies": {},
+    "secrets": {
+      "value": [
+        {
+          "name": "DevOps-Vm-Secretv2",
+          "value": "N3xtStp1saKyV@ult!",
+          "tags": {
+            "created-by": "Gabriel",
+            "created-on": "2025-06-17T00:00:00Z",
+            "kv-purpose": "Secret for DevOps VM"
+          },
+          "attributes": {
+            "enabled": true
+          }
+        }
+      ]
+    },
+    "keys": {},
+    "enableVaultForDeployment": {
+      "value": true
+    },
+    "enableVaultForTemplateDeployment": {
+      "value": true
+    },
+    "enableVaultForDiskEncryption": {
+      "value": true
+    },
+    "enableSoftDelete": {
+      "value": true
+    },
+    "softDeleteRetentionInDays": {
+      "value": 90
+    },
+    "enableRbacAuthorization": {
+      "value": true
+    },
+    "createMode": {
+      "value": "default"
+    },
+    "enablePurgeProtection": {
+      "value": true
+    },
+    "sku": {
+      "value": "standard"
+    },
+    "networkAcls": {},
+    "publicNetworkAccess": {
+      "value": ""
+    },
+    "lock": {},
+    "roleAssignments": {
+      "value": [
+        {
+          "roleDefinitionId": "/providers/Microsoft.Authorization/roleDefinitions/7f951dda-8b9c-4d1a-8e2b-3f0c6b5d1c2a",
+          "principalId": "00000000-0000-0000-0000-000000000000",
+          "scope": "/subscriptions/your-subscription-id/resourceGroups/your-resource-group/providers/Microsoft.KeyVault/vaults/devOps-Kv"
+        }
+      ]
+    },
+    "privateEndpoints": {},
+    "tags": {},
+    "diagnosticSettings": {},
+    "enableTelemetry": {
+      "value": false
+    }
+  }
+}

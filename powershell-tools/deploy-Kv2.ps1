@@ -1,6 +1,7 @@
 # Define reusable variables
 $deploymentName = "DevOpsKvDeployment"
 $templateFile = "c:\Dev-Environment\Devops-Tools-VM\avm\res\key-vault\vault\devops-kv.bicep"
+$templateparameterFile = "c:\Dev-Environment\Devops-Tools-VM\avm\res\key-vault\vault\devops-kv.parameters.json"
 $resourceGroupName = "DevOps-ToolsV2"
 $deploymentLocation = "eastus"
 $subscriptionId = "58a4a8cd-3b3b-4fcc-ad44-d7bf8c3df844"
@@ -20,5 +21,6 @@ New-AzResourceGroupDeployment `
   -ResourceGroupName $resourceGroupName `
   -Location $deploymentLocation `
   -TemplateFile $templateFile `
+  -TemplateParameterFile $templateparameterFile `
   -vmMiPrincipalId $principalId  # Ensure this parameter exists in the Bicep template
 

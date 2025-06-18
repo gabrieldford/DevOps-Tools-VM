@@ -25,6 +25,35 @@ jobs:
             az deployment group create \
               --name kvDeployment \
               --resource-group $RESOURCE_GROUP_NAME \
-              --template-file ./avm/res/key-vault/vault/devops-kv.bicep \
-              --only-show-errors          
+              --template-file ./avm/res/key-vault/vault/devops-kv2.bicep \
+              --parameters secrets='[
+                  {
+                    "name": "DevOps-Vm-Secretv2",
+                    "value": "N3xtStp1saKyV@ult!",
+                    "tags": {
+                      "created-by": "Gabriel",
+                      "created-on": "2025-06-18",
+                      "kv-purpose": "Secret for DevOps VM"
+                  },
+                  "attributes": {
+                    "enabled": true
+                  }
+                 }
+                ]' \
+                rolesAssignments='[
+                  {
+                    "roleDefinitionName": "Key Vault Secrets User",
+                    "principalId": "8f9f7624-eb16-46f7-aaef-79eb06c286db",
+                    "description": "DevOps VM Identity.",
+                    "principalType": "ServicePrincipal"
+                  },
+                  {
+                    "roleDefinitionName": "Key Vault Administrator",
+                    "principalId": "75e8c793-8646-411a-b342-7a1a4c53620d",
+                    "description": "Gabriel's User Identity.",
+                    "principalType": "User"
+                  }
+                ]' \
+                vmMiPrincipalId='8f9f7624-eb16-46f7-aaef-79eb06c286db' \ 
+            --only-show-errors          
    

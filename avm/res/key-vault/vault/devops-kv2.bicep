@@ -1,5 +1,5 @@
 //All paramters are being done inline to avoid the need for a parameters file. The parameters file cause issued with the DevOps-VM module.
-//I am testing the use without to see if that works better.
+//secrets and roleassignments are passed in from a yaml deployment script.
 
 metadata name = 'Key Vaults'
 metadata description = 'This module deploys a Key Vault.'
@@ -21,20 +21,7 @@ param location string = resourceGroup().location
 param accessPolicies accessPolicyType[]?
 
 @description('Optional. All secrets to create.')
-param secrets secretType []  = [
-  {
-    name: 'DevOps-Vm-Secretv2'
-    value: 'N3xtStp1saKyV@ult!'
-    tags: {
-      'created-by': 'Gabriel'
-      'created-on': utcNow()
-      'kv-purpose': 'Secret for DevOps VM'
-    }
-    attributes: {
-      enabled: true
-    }
-  }
-]
+param secrets secretType []
 
 @description('Optional. All keys to create.')
 param keys keyType[]?
@@ -87,21 +74,7 @@ param lock lockType?
 
 import { roleAssignmentType } from 'br/public:avm/utl/types/avm-common-types:0.5.1'
 @description('Optional. Array of role assignments to create.')
-param roleAssignments roleAssignmentType[] = [
-  {
-    //principalId: '228ca9ce-ec1f-4cdc-983d-a351a3ce4f94' // This is the DevOps VM's managed identity
-    principalId: vmMiPrincipalId
-    roleDefinitionIdOrName: 'Key Vault Secrets User'
-    description: 'This role assignment allows the DevOps VM to read secrets from the Key Vault.'
-    principalType: 'ServicePrincipal'
-  }
-  {
-    principalId: '75e8c793-8646-411a-b342-7a1a4c53620d'  //GabrielUser Identity
-    roleDefinitionIdOrName: 'Key Vault Administrator'
-    description: 'This role assignment users full control of data plane.'
-    principalType: 'User'
-  }
-]
+param roleAssignments roleAssignmentType[]
 
 import { privateEndpointSingleServiceType } from 'br/public:avm/utl/types/avm-common-types:0.5.1'
 @description('Optional. Configuration details for private endpoints. For security reasons, it is recommended to use private endpoints whenever possible.')
