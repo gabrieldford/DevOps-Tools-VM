@@ -1,29 +1,33 @@
 name: Testing Key Vault Deployment using CLI
+
 on: [workflow_dispatch]
+
 env: 
   RESOURCE_GROUP_NAME: DevOps-ToolsV2
   LOCATION: eastus
   MANAGED_IDENTITY_NAME: devOps-ToolsVm-identityV2
+
 permissions:
   contents: read
   id-token: write
+
 jobs:
-      
-    deploy-KV:
-      name: Deploy Key Vault using Bicep
-      runs-on: ubuntu-latest
-      steps:
-        - uses: actions/checkout@v3
+  deploy-KV:
+    name: Deploy Key Vault using Bicep
+    runs-on: ubuntu-latest
 
-        - uses: azure/login@v1
-          with:
-            client-id: ${{ secrets.AZURE_CLIENT_ID }}
-            tenant-id: ${{ secrets.AZURE_TENANT_ID }}
-            subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+    steps:
+      - uses: actions/checkout@v3
 
-        - name: Create Key Vault parameter file
-          run: |
-            cat <<EOF > kv.parameters.json
+      - uses: azure/login@v1
+        with:
+          client-id: ${{ secrets.AZURE_CLIENT_ID }}
+          tenant-id: ${{ secrets.AZURE_TENANT_ID }}
+          subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+
+      - name: Create Key Vault parameter file
+        run: |
+          cat <<EOF > kv.parameters.json
 {
   "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentParameters.json#",
   "contentVersion": "1.0.0.0",
@@ -65,13 +69,13 @@ jobs:
     }
   }
 }
-EOF    
-        - name: Deploy Key Vault using BICEP
-          run: |
-            az deployment group create \
-              --name kvDeployment \
-              --resource-group $RESOURCE_GROUP_NAME \
-              --template-file ./avm/res/key-vault/vault/devops-kv2.bicep \
-              --only-show-errors \
-              --parameters @kv.parameters.json
-          
+EOF
+
+      - name: Deploy Key Vault using BICEP
+        run: |
+          az deployment group create \
+            --name kvDeployment \
+            --resource-group $RESOURCE_GROUP_NAME \
+            --template-file ./avm/res/key-vault/vault/devops-kv2.bicep \
+            --only-show-errors \
+            --parameters @kv.parameters.json
