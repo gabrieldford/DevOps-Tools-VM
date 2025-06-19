@@ -29,15 +29,18 @@ jobs:
 
       - name: Show Azure CLI version
         run: az --version    
-      - name: Upgrade Azure CLI
-        run: az upgrade --yes    
 
-      - name: Show Azure CLI version after upgrade
-        run: az --version  
+      - name: Validate Key Vault deployment
+        run: |
+          az deployment group validate \
+            --resource-group $RESOURCE_GROUP_NAME \
+            --template-file './avm/res/key-vault/vault/devops-kv.bicep' \
+            --only-show-errors
+
       - name: Deploy Key Vault using BICEP
         run: |
           az deployment group create \
             --name kvDeployment \
-            --resource-group $RESOURCE_GROUP_NAME \
+            --resource-group '$RESOURCE_GROUP_NAME' \
             --template-file './avm/res/key-vault/vault/devops-kv.bicep' \
             --only-show-errors  
