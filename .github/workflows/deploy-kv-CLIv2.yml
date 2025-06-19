@@ -33,7 +33,7 @@ jobs:
       - name: Validate Key Vault deployment
         run: |
           az deployment group validate \
-            --resource-group $RESOURCE_GROUP_NAME \
+            --resource-group 'DevOps-ToolsV2' \
             --template-file './avm/res/key-vault/vault/devops-kv.bicep' \
             --only-show-errors
 
