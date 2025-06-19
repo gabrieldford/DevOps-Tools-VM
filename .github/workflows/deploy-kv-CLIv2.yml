@@ -1,4 +1,4 @@
-name: Testing Key Vault Deployment static Parms
+name: Testing Key Vault Deployment no parms file.
 
 on: [workflow_dispatch]
 
@@ -32,6 +32,5 @@ jobs:
           az deployment group create \
             --name kvDeployment \
             --resource-group $RESOURCE_GROUP_NAME \
-            --template-file './avm/res/key-vault/vault/devops-kv2.bicep' \
-            --parameters '@./avm/res/key-vault/vault/devops-kv2.parameters.json' \
+            --template-file './avm/res/key-vault/vault/devops-kv.bicep' \
             --only-show-errors  
