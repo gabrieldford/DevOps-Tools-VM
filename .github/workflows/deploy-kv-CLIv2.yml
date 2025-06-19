@@ -40,7 +40,7 @@ jobs:
       - name: Deploy Key Vault using BICEP
         run: |
           az deployment group create \
-            --name kvDeployment \
-            --resource-group '$RESOURCE_GROUP_NAME' \
+            --name 'kvDeployment' \
+            --resource-group 'DevOps-ToolsV2' \
             --template-file './avm/res/key-vault/vault/devops-kv.bicep' \
             --only-show-errors  
