@@ -27,6 +27,13 @@ jobs:
           tenant-id: ${{ secrets.AZURE_TENANT_ID }}
           subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
 
+      - name: Show Azure CLI version
+        run: az --version    
+      - name: Upgrade Azure CLI
+        run: az upgrade --yes    
+
+      - name: Show Azure CLI version after upgrade
+        run: az --version  
       - name: Deploy Key Vault using BICEP
         run: |
           az deployment group create \
