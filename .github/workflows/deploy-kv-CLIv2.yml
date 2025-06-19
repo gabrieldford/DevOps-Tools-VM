@@ -36,6 +36,7 @@ jobs:
             --resource-group 'DevOps-ToolsV2' \
             --template-file './avm/res/key-vault/vault/devops-kv.bicep' \
             --only-show-errors
+            --debug
 
       - name: Deploy Key Vault using BICEP
         run: |
