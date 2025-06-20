@@ -1,4 +1,4 @@
-name: Testing Key Vault Deployment no parms file.
+name: Testing Key Vault Parameters file.
 
 on: [workflow_dispatch]
 
