@@ -34,7 +34,8 @@ jobs:
         run: |
           az deployment group validate \
             --resource-group 'DevOps-ToolsV2' \
-            --template-file './avm/res/key-vault/vault/devops-kv.bicep' \
+            --template-file './avm/res/key-vault/vault/devops-kv2.bicep' \
+            --parameters @.avm/res/key-vault/vault/devops-kv2.parameters.json \
             --debug
 
       - name: Deploy Key Vault using BICEP
