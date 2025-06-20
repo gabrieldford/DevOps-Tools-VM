@@ -1,47 +1,41 @@
 {
-  "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+  "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentParameters.json#",
   "contentVersion": "1.0.0.0",
   "parameters": {
     "name": {
-      "value": "DevOps-gdf-Kv5"
+      "value": "DevOps-gdf-Kv6"
     },
-    "accessPolicies": {},
-    "secrets": {},
-    "keys": {},
-    "enableVaultForDeployment": {
-      "value": false
+    "secrets": {
+      "value": [
+        {
+          "name": "DevOps-Vm-Secretv3",
+          "value": "N3xtStp1saKyVault!",
+          "attributes": {
+            "enabled": true
+          },
+          "tags": {
+            "created-on": "2025-06-18",
+            "created-by": "GitHub Actions",
+            "kv-purpose": "Secret for DevOps VM"
+          }
+        }
+      ]
     },
-    "enableVaultForTemplateDeployment": {
-      "value": false
-    },
-    "enableVaultForDiskEncryption": {
-      "value": false
-    },
-    "enableSoftDelete": {
-      "value": false
-    },
-    "softDeleteRetentionInDays": {
-      "value": 0
-    },
-    "enableRbacAuthorization": {
-      "value": false
-    },
-    "createMode": {
-      "value": ""
-    },
-    "enablePurgeProtection": {
-      "value": false
-    },
-    "sku": {},
-    "networkAcls": {},
-    "publicNetworkAccess": {},
-    "lock": {},
-    "roleAssignments": {},
-    "privateEndpoints": {},
-    "tags": {},
-    "diagnosticSettings": {},
-    "enableTelemetry": {
-      "value": false
+    "roleAssignments": {
+      "value": [
+        {
+          "principalType": "ServicePrincipal",
+          "description": "DevOps VM Identity",
+          "roleDefinitionIdOrName": "Key Vault Secrets User",
+          "principalId": "8f9f7624-eb16-46f7-aaef-79eb06c286db"
+        },
+        {
+          "principalType": "User",
+          "description": "Gabriel's User Identity",
+          "roleDefinitionIdOrName": "Key Vault Administrator",
+          "principalId": "75e8c793-8646-411a-b342-7a1a4c53620d"
+        }
+      ]
     }
   }
 }
