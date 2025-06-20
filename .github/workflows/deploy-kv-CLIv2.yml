@@ -35,7 +35,7 @@ jobs:
           az deployment group validate \
             --resource-group 'DevOps-ToolsV2' \
             --template-file './avm/res/key-vault/vault/devops-kv2.bicep' \
-            --parameters @.avm/res/key-vault/vault/devops-kv2.parameters.json \
+            --parameters @avm/res/key-vault/vault/devops-kv2.parameters.json \
             --debug
 
       - name: Deploy Key Vault using BICEP
@@ -44,5 +44,5 @@ jobs:
             --name 'kvDeployment' \
             --resource-group 'DevOps-ToolsV2' \
             --template-file './avm/res/key-vault/vault/devops-kv2.bicep' \
-            --parameters @.avm/res/key-vault/vault/devops-kv2.parameters.json \
+            --parameters @avm/res/key-vault/vault/devops-kv2.parameters.json \
             --only-show-errors  
