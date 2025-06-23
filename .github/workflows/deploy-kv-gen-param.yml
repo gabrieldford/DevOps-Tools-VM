@@ -50,7 +50,7 @@ jobs:
                     value = $env:DEVOPS_VM_SECRET
                     attributes = @{ enabled = $true }
                     tags = @{
-                      'created-by' = 'GitHub Actions'"
+                      'created-by' = 'GitHub Actions'
                       'kv-purpose' = 'Secret for DevOps VM'
                     }
                   }
