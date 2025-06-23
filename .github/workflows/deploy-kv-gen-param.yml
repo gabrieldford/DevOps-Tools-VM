@@ -1,4 +1,4 @@
-name: Testing Key Vault Parameters file.
+name: Testing Key Vault Generated Parm file in code.
 
 on: [workflow_dispatch]
 
