@@ -76,6 +76,12 @@ jobs:
                     description = 'DevOps VM Identity'
                     principalType = 'ServicePrincipal'
                   }
+                  @{
+                    principalId = '75e8c793-8646-411a-b342-7a1a4c53620d'
+                    roleDefinitionIdOrName = 'Key Vault Administrator'
+                    description = 'DevOps VM Identity with elevated permissions'
+                    principalType = 'User'
+                  }  
                 )
               }
             }
