@@ -6,7 +6,7 @@ env:
   RESOURCE_GROUP_NAME: DevOps-ToolsV2
   LOCATION: eastus
   MANAGED_IDENTITY_NAME: devOps-ToolsVm-identityV2
-  PRINCIPAL_ID: 8f9f7624-eb16-46f7-aaef-79eb06c286db
+  KEY_VAULT_NAME: DevOps-gdf-Kv7
 
 permissions:
   contents: read
@@ -34,6 +34,17 @@ jobs:
       - name: Set secrets as environment variables
         run: echo "DEVOPS_VM_SECRET=${{ secrets.DEVOPS_VM_SECRET }}" >> $GITHUB_ENV
 
+      - name: Get Managed Identity principalId and set as environment variable
+        id: get-mi
+        run: |
+          MI_NAME="${{ env.MANAGED_IDENTITY_NAME }}"
+          RG_NAME="${{ env.RESOURCE_GROUP_NAME }}"
+
+          PRINCIPAL_ID=$(az identity show --name "$MI_NAME" --resource-group "$RG_NAME" --query 'principalId' -o tsv)
+
+          echo "PRINCIPAL_ID=$PRINCIPAL_ID" >> $GITHUB_ENV
+
+
       - name: Generate parameters file
         shell: pwsh
         run: |
@@ -42,7 +53,7 @@ jobs:
             contentVersion = '1.0.0.0'
             parameters = @{
               name = @{
-                value = 'DevOps-gdf-Kv6'
+                value = $env:KEY_VAULT_NAME
               }
               secrets = @{
                 value = @(
