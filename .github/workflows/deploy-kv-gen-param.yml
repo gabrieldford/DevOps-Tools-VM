@@ -1,0 +1,89 @@
+name: Testing Key Vault Parameters file.
+
+on: [workflow_dispatch]
+
+env: 
+  RESOURCE_GROUP_NAME: DevOps-ToolsV2
+  LOCATION: eastus
+  MANAGED_IDENTITY_NAME: devOps-ToolsVm-identityV2
+
+permissions:
+  contents: read
+  id-token: write
+
+jobs:
+  deploy-KV:
+    name: Deploy Key Vault using Bicep
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Login to Azure
+        uses: azure/login@v1
+        with:
+          client-id: ${{ secrets.AZURE_CLIENT_ID }}
+          tenant-id: ${{ secrets.AZURE_TENANT_ID }}
+          subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+
+      - name: Show Azure CLI version
+        run: az --version    
+
+      - name: Set secrets as environment variables
+        run: echo "DEVOPS_VM_SECRET=${{ secrets.DEVOPS_VM_SECRET }}" >> $GITHUB_ENV
+
+      - name: Generate parameters file
+        shell: pwsh
+        run: |
+          $json = @{
+            '$schema' = 'https://schema.management.azure.com/schemas/2019-04-01/deploymentParameters.json#'
+            contentVersion = '1.0.0.0'
+            parameters = @{
+              name = @{
+                value = 'DevOps-gdf-Kv6'
+              }
+              secrets = @{
+                value = @(
+                  @{
+                    name = 'DevOps-Vm-Secret'
+                    value = $env:DEVOPS_VM_SECRET
+                    attributes = @{ enabled = $true }
+                    tags = @{
+                      'created-by' = 'GitHub Actions'"
+                      'kv-purpose' = 'Secret for DevOps VM'
+                    }
+                  }
+                )
+              }
+              roleAssignments = @{
+                value = @(
+                  @{
+                    principalId = $env:PRINCIPAL_ID
+                    roleDefinitionIdOrName = 'Key Vault Secrets User'
+                    description = 'DevOps VM Identity'
+                    principalType = 'ServicePrincipal'
+                  }
+                )
+              }
+            }
+          }
+
+          $json | ConvertTo-Json -Depth 10 | Set-Content -Path 'kv.params.json' -Encoding utf8
+
+      - name: Validate Key Vault deployment
+        run: |
+          az deployment group validate \
+            --resource-group 'DevOps-ToolsV2' \
+            --template-file './avm/res/key-vault/vault/devops-kv2.bicep' \
+            --parameters @kv.params.json \
+            --debug
+
+      - name: Deploy Key Vault using BICEP
+        run: |
+          az deployment group create \
+            --name 'kvDeployment' \
+            --resource-group 'DevOps-ToolsV2' \
+            --template-file './avm/res/key-vault/vault/devops-kv2.bicep' \
+            --parameters @kv.params.json \
+            --only-show-errors  
