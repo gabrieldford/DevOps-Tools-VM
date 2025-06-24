@@ -18,9 +18,9 @@ jobs:
 
         - uses: azure/login@v1
           with:
-            client-id: '2535f38e-9d86-42dd-a415-8f388e5282fb'
-            tenant-id: '577e5b12-eac6-4389-bac2-cfab1a261cef'
-            subscription-id: '58a4a8cd-3b3b-4fcc-ad44-d7bf8c3df844'
+            client-id: ${{ secrets.AZURE_CLIENT_ID }}
+            tenant-id: ${{ secrets.AZURE_TENANT_ID }}
+            subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
         
         - name: Deploy Bicep template to subscription
           run: |
@@ -46,7 +46,7 @@ jobs:
           run: |
             az deployment group create \
               --name deploy-vnet-module \
-              --resource-group "DevOps-ToolsV2" \
+              --resource-group ${{ env.RESOURCE_GROUP_NAME }} \
               --template-file ./avm/res/network/virtual-network/main-vnet.bicep \
               --parameters @./avm/res/network/virtual-network/main-vnet.parameters.json \
               --only-show-errors
@@ -147,7 +147,7 @@ jobs:
         - name: Validate Key Vault deployment
           run: |
             az deployment group validate \
-              --resource-group 'DevOps-ToolsV2' \
+              --resource-group ${{ env.RESOURCE_GROUP_NAME }} \
               --template-file './avm/res/key-vault/vault/devops-kv2.bicep' \
               --parameters @kv.params.json \
               --debug
@@ -156,7 +156,7 @@ jobs:
           run: |
             az deployment group create \
               --name 'kvDeployment' \
-              --resource-group 'DevOps-ToolsV2' \
+              --resource-group ${{ env.RESOURCE_GROUP_NAME }} \
               --template-file './avm/res/key-vault/vault/devops-kv2.bicep' \
               --parameters @kv.params.json \
               --only-show-errors  
