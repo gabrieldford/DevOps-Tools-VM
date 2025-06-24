@@ -85,22 +85,79 @@ jobs:
             tenant-id: ${{ secrets.AZURE_TENANT_ID }}
             subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
         
-        - name: Get Managed Identity Object ID (CLI)
+        - name: Set secrets as environment variables
+          run: echo "DEVOPS_VM_SECRET=${{ secrets.DEVOPS_VM_SECRET }}" >> $GITHUB_ENV
+
+        - name: Get Managed Identity principalId and set as environment variable
           id: get-mi
           run: |
-            objectId=$(az identity show \
-              --resource-group ${{ env.RESOURCE_GROUP_NAME }} \
-              --name ${{ env.MANAGED_IDENTITY_NAME }} \
-              --query principalId \
-              --output tsv)
+            MI_NAME="${{ env.MANAGED_IDENTITY_NAME }}"
+            RG_NAME="${{ env.RESOURCE_GROUP_NAME }}"
 
-            echo "objectId=$objectId" >> $GITHUB_OUTPUT
+            PRINCIPAL_ID=$(az identity show --name "$MI_NAME" --resource-group "$RG_NAME" --query 'principalId' -o tsv)
+
+            echo "PRINCIPAL_ID=$PRINCIPAL_ID" >> $GITHUB_ENV
+
+
+        - name: Generate parameters file
+          shell: pwsh
+          run: |
+            $json = @{
+              '$schema' = 'https://schema.management.azure.com/schemas/2019-04-01/deploymentParameters.json#'
+              contentVersion = '1.0.0.0'
+              parameters = @{
+                name = @{
+                  value = $env:KEY_VAULT_NAME
+                }
+                secrets = @{
+                  value = @(
+                    @{
+                      name = 'DevOps-Vm-Secret'
+                      value = $env:DEVOPS_VM_SECRET
+                      attributes = @{ enabled = $true }
+                      tags = @{
+                        'created-by' = 'GitHub Actions'
+                        'kv-purpose' = 'Secret for DevOps VM'
+                      }
+                    }
+                  )
+                }
+                roleAssignments = @{
+                  value = @(
+                    @{
+                      principalId = $env:PRINCIPAL_ID
+                      roleDefinitionIdOrName = 'Key Vault Secrets User'
+                      description = 'DevOps VM Identity'
+                      principalType = 'ServicePrincipal'
+                    }
+                    @{
+                      principalId = '75e8c793-8646-411a-b342-7a1a4c53620d'
+                      roleDefinitionIdOrName = 'Key Vault Administrator'
+                      description = 'DevOps VM Identity with elevated permissions'
+                      principalType = 'User'
+                    }  
+                  )
+                }
+              }
+            }
+
+            $json | ConvertTo-Json -Depth 10 | Set-Content -Path 'kv.params.json' -Encoding utf8
+
+        - name: Validate Key Vault deployment
+          run: |
+            az deployment group validate \
+              --resource-group 'DevOps-ToolsV2' \
+              --template-file './avm/res/key-vault/vault/devops-kv2.bicep' \
+              --parameters @kv.params.json \
+              --debug
+
         - name: Deploy Key Vault using BICEP
           run: |
             az deployment group create \
-              --name deploy-kv-module \
-              --resource-group ${{ env.RESOURCE_GROUP_NAME }} \
-              --template-file ./avm/res/key-vault/vault/devops-kv.bicep \
-              --parameters vmMiPrincipalId=${{ steps.get-mi.outputs.objectId }} \
-              --only-show-errors          
+              --name 'kvDeployment' \
+              --resource-group 'DevOps-ToolsV2' \
+              --template-file './avm/res/key-vault/vault/devops-kv2.bicep' \
+              --parameters @kv.params.json \
+              --only-show-errors  
+
     
