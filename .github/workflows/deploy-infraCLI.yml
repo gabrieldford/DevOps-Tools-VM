@@ -264,7 +264,7 @@ jobs:
             az deployment group create \
               --name vm-deployment \
               --resource-group ${{ env.RESOURCE_GROUP_NAME }} \
-              --template-file ./path/to/vm.bicep \
+              --template-file './avm/res/compute/virtual-machine/devops-vm.bicep' \
               --parameters @vm.parameters.json \
               --only-show-errors
         
