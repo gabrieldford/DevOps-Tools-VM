@@ -164,7 +164,7 @@ jobs:
               --only-show-errors  
 
     deploy-VM:               
-      name: Deploy Key Vault using Bicep
+      name: Deploy VM using Bicep
       runs-on: ubuntu-latest
       needs: deploy-KV
       steps:
