@@ -19,8 +19,8 @@ jobs:
         - uses: azure/login@v1
           with:
             client-id: ${{ secrets.AZURE_CLIENT_ID }}
-            tenant-id: '577e5b12-eac6-4389-bac2-cfab1a261cef'
-            subscription-id: '58a4a8cd-3b3b-4fcc-ad44-d7bf8c3df844'
+            tenant-id: ${{ secrets.AZURE_TENANT_ID }}
+            subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
         
         - name: Deploy VM template and parameters
           run: |
