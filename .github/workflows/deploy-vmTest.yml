@@ -1,6 +1,12 @@
 name: VM Deployment test
 on: [workflow_dispatch]
 
+env: 
+  RESOURCE_GROUP_NAME: DevOps-ToolsV2
+  LOCATION: eastus
+  MANAGED_IDENTITY_NAME: devOps-ToolsVm-identityV2
+  KEY_VAULT_NAME: DevOps-gdf-Kv7
+
 permissions:
   contents: read
   id-token: write
@@ -12,7 +18,7 @@ jobs:
 
         - uses: azure/login@v1
           with:
-            client-id: '2535f38e-9d86-42dd-a415-8f388e5282fb'
+            client-id: ${{ secrets.AZURE_CLIENT_ID }}
             tenant-id: '577e5b12-eac6-4389-bac2-cfab1a261cef'
             subscription-id: '58a4a8cd-3b3b-4fcc-ad44-d7bf8c3df844'
         

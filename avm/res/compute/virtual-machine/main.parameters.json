@@ -163,9 +163,6 @@
         "enabled": false
       }
     },
-    "location": {
-      "value": ""
-    },
     "lock": {},
     "roleAssignments": {},
     "tags": {},
