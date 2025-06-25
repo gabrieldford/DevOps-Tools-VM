@@ -166,7 +166,7 @@ jobs:
     deploy-VM:               
       name: Deploy Key Vault using Bicep
       runs-on: ubuntu-latest
-      needs: deploy-Managed-Identity
+      needs: deploy-KV
       steps:
         - uses: actions/checkout@v3
 
