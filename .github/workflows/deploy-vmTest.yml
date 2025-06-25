@@ -1,0 +1,27 @@
+name: VM Deployment test
+on: [workflow_dispatch]
+
+permissions:
+  contents: read
+  id-token: write
+jobs:
+    deploy:
+      runs-on: ubuntu-latest
+      steps:
+        - uses: actions/checkout@v3
+
+        - uses: azure/login@v1
+          with:
+            client-id: '2535f38e-9d86-42dd-a415-8f388e5282fb'
+            tenant-id: '577e5b12-eac6-4389-bac2-cfab1a261cef'
+            subscription-id: '58a4a8cd-3b3b-4fcc-ad44-d7bf8c3df844'
+        
+        - name: Deploy VM template and parameters
+          run: |
+            az deployment group create \
+              --name 'vmDeployment' \
+              --resource-group 'DevOps-ToolsV2' \
+              --template-file './avm/res/compute/virtual-machine/devops-vm.bicep' \
+              --parameters @./avm/res/compute/virtual-machine/main.parameters.json \
+              --only-show-errors
+
