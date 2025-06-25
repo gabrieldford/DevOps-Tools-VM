@@ -102,6 +102,6 @@ jobs:
           az deployment group create \
             --name 'kvDeployment' \
             --resource-group 'DevOps-ToolsV2' \
-            --template-file './avm/res/key-vault/vault/devops-kv2.bicep' \
+            --template-file 'avm/res/key-vault/vault/devops-kv2.bicep' \
             --parameters @kv.params.json \
             --only-show-errors  
