@@ -23,5 +23,5 @@ jobs:
               --resource-group 'DevOps-ToolsV2' \
               --template-file './avm/res/compute/virtual-machine/devops-vm.bicep' \
               --parameters @./avm/res/compute/virtual-machine/main.parameters.json \
-              --only-show-errors
+              --debug
 
