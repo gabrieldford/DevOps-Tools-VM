@@ -76,13 +76,13 @@ param priority string?
   'Deallocate'
   'Delete'
 ])
-param evictionPolicy string = 'Deallocate'
+param evictionPolicy string 
 
 @description('Optional. Specifies the maximum price you are willing to pay for a low priority VM/VMSS. This price is in US Dollars.')
-param maxPriceForLowPriorityVm string = ''
+param maxPriceForLowPriorityVm string
 
 @description('Optional. Specifies resource ID about the dedicated host that the virtual machine resides in.')
-param dedicatedHostId string = ''
+param dedicatedHostId string
 
 @description('Optional. Specifies that the image or disk that is being used was licensed on-premises.')
 @allowed([
@@ -92,10 +92,10 @@ param dedicatedHostId string = ''
   'Windows_Server'
   ''
 ])
-param licenseType string = ''
+param licenseType string
 
 @description('Optional. The list of SSH public keys used to authenticate with linux based VMs.')
-param publicKeys publicKeyType[] = []
+param publicKeys publicKeyType[]
 
 import { managedIdentityAllType } from 'br/public:avm/utl/types/avm-common-types:0.5.1'
 @description('Optional. The managed identity definition for this resource. The system-assigned managed identity will automatically be enabled if extensionAadJoinConfig.enabled = "True".')
@@ -136,7 +136,7 @@ param zone int
 param nicConfigurations nicConfigurationType[]
 
 @description('Optional. Recovery service vault name to add VMs to backup.')
-param backupVaultName string = ''
+param backupVaultName string
 
 @description('Optional. Resource group of the backup recovery service vault. If not provided the current resource group name is considered by default.')
 param backupVaultResourceGroup string = resourceGroup().name
@@ -148,7 +148,7 @@ param backupPolicyName string = 'DefaultPolicy'
 param autoShutdownConfig autoShutDownConfigType = {}
 
 @description('Optional. The resource Id of a maintenance configuration for this VM.')
-param maintenanceConfigurationResourceId string = ''
+param maintenanceConfigurationResourceId string
 
 // Child resources
 @description('Optional. Specifies whether extension operations should be allowed on the virtual machine. This may only be set to False when no extensions are present on the virtual machine.')
@@ -156,11 +156,11 @@ param allowExtensionOperations bool = false
 
 @description('Optional. Required if name is specified. Password of the user specified in user parameter.')
 @secure()
-param extensionDomainJoinPassword string = ''
+param extensionDomainJoinPassword string
 
 @description('Optional. The configuration for the [Domain Join] extension. Must at least contain the ["enabled": true] property to be executed.')
 @secure()
-param extensionDomainJoinConfig object = {}
+param extensionDomainJoinConfig object
 
 @description('Optional. The configuration for the [AAD Join] extension. Must at least contain the ["enabled": true] property to be executed. To enroll in Intune, add the setting mdmId: "0000000a-0000-0000-c000-000000000000".')
 param extensionAadJoinConfig object
@@ -244,13 +244,13 @@ param roleAssignments roleAssignmentType[]?
 param tags object?
 
 @description('Optional. Enable/Disable usage telemetry for module.')
-param enableTelemetry bool = true
+param enableTelemetry bool 
 
 @description('Generated. Do not provide a value! This date value is used to generate a registration token.')
 param baseTime string = utcNow('u')
 
 @description('Optional. SAS token validity length to use to download files from storage accounts. Usage: \'PT8H\' - valid for 8 hours; \'P5D\' - valid for 5 days; \'P1Y\' - valid for 1 year. When not provided, the SAS token will be valid for 8 hours.')
-param sasTokenValidityLength string = 'PT8H'
+param sasTokenValidityLength string
 
 @description('Required. The chosen OS type.')
 @allowed([
@@ -261,13 +261,13 @@ param osType string
 
 @description('Optional. Specifies whether password authentication should be disabled.')
 #disable-next-line secure-secrets-in-params // Not a secret
-param disablePasswordAuthentication bool = false
+param disablePasswordAuthentication bool
 
 @description('Optional. Indicates whether virtual machine agent should be provisioned on the virtual machine. When this property is not specified in the request body, default behavior is to set it to true. This will ensure that VM Agent is installed on the VM so that extensions can be added to the VM later.')
-param provisionVMAgent bool = true
+param provisionVMAgent bool
 
 @description('Optional. Indicates whether Automatic Updates is enabled for the Windows virtual machine. Default value is true. When patchMode is set to Manual, this parameter must be set to false. For virtual machine scale sets, this property can be updated and updates will take effect on OS reprovisioning.')
-param enableAutomaticUpdates bool = true
+param enableAutomaticUpdates bool
 
 @description('Optional. VM guest patching orchestration mode. \'AutomaticByOS\' & \'Manual\' are for Windows only, \'ImageDefault\' for Linux only. Refer to \'https://learn.microsoft.com/en-us/azure/virtual-machines/automatic-vm-guest-patching\'.')
 @allowed([
@@ -277,10 +277,10 @@ param enableAutomaticUpdates bool = true
   'ImageDefault'
   ''
 ])
-param patchMode string = ''
+param patchMode string
 
 @description('Optional. Enables customer to schedule patching without accidental upgrades.')
-param bypassPlatformSafetyChecksOnUserSchedule bool = true
+param bypassPlatformSafetyChecksOnUserSchedule bool
 
 @description('Optional. Specifies the reboot setting for all AutomaticByPlatform patch installation operations.')
 @allowed([
@@ -289,17 +289,17 @@ param bypassPlatformSafetyChecksOnUserSchedule bool = true
   'Never'
   'Unknown'
 ])
-param rebootSetting string = 'IfRequired'
+param rebootSetting string
 
 @description('Optional. VM guest patching assessment mode. Set it to \'AutomaticByPlatform\' to enable automatically check for updates every 24 hours.')
 @allowed([
   'AutomaticByPlatform'
   'ImageDefault'
 ])
-param patchAssessmentMode string = 'ImageDefault'
+param patchAssessmentMode string
 
 @description('Optional. Enables customers to patch their Azure VMs without requiring a reboot. For enableHotpatching, the \'provisionVMAgent\' must be set to true and \'patchMode\' must be set to \'AutomaticByPlatform\'.')
-param enableHotpatching bool = false
+param enableHotpatching bool
 
 @description('Optional. Specifies the time zone of the virtual machine. e.g. \'Pacific Standard Time\'. Possible values can be `TimeZoneInfo.id` value from time zones returned by `TimeZoneInfo.GetSystemTimeZones`.')
 param timeZone string
@@ -311,7 +311,7 @@ param additionalUnattendContent additionalUnattendContentType[]?
 param winRMListeners winRMListenerType[]?
 
 @description('Optional. The configuration profile of automanage. Either \'/providers/Microsoft.Automanage/bestPractices/AzureBestPracticesProduction\', \'providers/Microsoft.Automanage/bestPractices/AzureBestPracticesDevTest\' or the resource Id of custom profile.')
-param configurationProfile string = ''
+param configurationProfile string
 
 var enableReferencedModulesTelemetry = false
 
