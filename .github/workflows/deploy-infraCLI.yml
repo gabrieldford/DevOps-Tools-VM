@@ -269,7 +269,7 @@ jobs:
                 patchAssessmentMode = @{ value = 'ImageDefault' }
                 additionalUnattendContent = @{}
                 configurationProfile = @{ value = '' }
-                autoShutdownConfig = @{ value = $false }
+                autoShutdownConfig = @{
                   value = @{
                     status = 'Enabled'
                     timezone = 'Eastern Standard Time'
