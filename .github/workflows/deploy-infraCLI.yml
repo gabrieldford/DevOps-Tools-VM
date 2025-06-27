@@ -259,7 +259,7 @@ jobs:
                 osType = @{ value = 'Windows' }
                 disablePasswordAuthentication = @{ value = $false }
                 enableTelemetry = @{ value = $false }
-                sasTokenValidityLength = @{ value 'PT8H' }
+                sasTokenValidityLength = @{ value = 'PT8H' }
                 provisionVMAgent = @{ value = $false }
                 enableAutomaticUpdates = @{ value = $false }
                 patchMode = @{}
