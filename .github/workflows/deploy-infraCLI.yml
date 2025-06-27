@@ -251,7 +251,11 @@ jobs:
                 maintenanceConfigurationResourceId = @{ value = '' }
                 extensionDomainJoinPassword = @{ value = '' }
                 extensionDomainJoinConfig = @{ value = @{} }
-                extensionAadJoinConfig = @{ value = @{} }
+                extensionAadJoinConfig = @{ 
+                  value = @{
+                    enabled = $false
+                  } 
+                }
                 extensionAntiMalwareConfig = @{ 
                   value = @{
                     enabled = $false 
