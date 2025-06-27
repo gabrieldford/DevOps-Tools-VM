@@ -244,7 +244,7 @@ jobs:
                     userAssignedResourceIds = "/subscriptions/58a4a8cd-3b3b-4fcc-ad44-d7bf8c3df844/resourcegroups/DevOps-ToolsV2/providers/Microsoft.ManagedIdentity/userAssignedIdentities/devOps-ToolsVm-identityV2"
                   }
                 }
-                galleryApplications = @{ value = [] }
+                galleryApplications = @{ value = @() }
                 backupVaultName = @{ value = '' }
                 backupPolicyName = @{ value = 'DefaultPolicy' }  
                 maintenanceConfigurationResourceId = @{ value = '' }
@@ -265,8 +265,8 @@ jobs:
                 rebootSetting = @{ value = 'IfRequired' }
                 patchAssessmentMode = @{ value = 'ImageDefault' }
                 enableHotpatching = @{ value = $false }
-                additionalUnattendContent = @{ value = [] }
-                winRMListeners = @{ value = [] }
+                additionalUnattendContent = @{ value = @() }
+                winRMListeners = @{ value = @() }
                 timeZone = @{ value = 'Eastern Standard Time' }
                 configurationProfile = @{ value = '' }
                 autoShutdownConfig = @{
