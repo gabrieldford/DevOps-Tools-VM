@@ -266,7 +266,7 @@ jobs:
                 bypassPlatformSafetyChecksOnUserSchedule = @{ value = $true }
                 rebootSetting = @{ value = 'IfRequired' }
                 patchAssessmentMode = @{ value = 'ImageDefault' }
-                enableHotPatching = @{ value = $false }
+                enableHotpatching = @{ value = $false }
                 additionalUnattendContent = @{}
                 winRMListeners = @{}
                 timeZone = 'Eastern Standard Time'
