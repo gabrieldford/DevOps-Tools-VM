@@ -257,7 +257,6 @@ jobs:
                     enabled = $false 
                   }
                 }
-                extensionNetworkWatcherAgentConfig = @{ value = $false }
                 zone = @{ value = 0 }
                 osType = @{ value = 'Windows' }
                 disablePasswordAuthentication = @{ value = $false }
