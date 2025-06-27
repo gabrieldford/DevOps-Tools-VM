@@ -297,5 +297,5 @@ jobs:
               --resource-group ${{ env.RESOURCE_GROUP_NAME }} \
               --template-file './avm/res/compute/virtual-machine/devops-vm.bicep' \
               --parameters @vm.parameters.json \
-              --only-show-errors
+              --debug 
         
