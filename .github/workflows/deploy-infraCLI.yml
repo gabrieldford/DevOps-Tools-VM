@@ -251,8 +251,12 @@ jobs:
                 maintenanceConfigurationResourceId = @{ value = '' }
                 extensionDomainJoinPassword = @{ value = '' }
                 extensionDomainJoinConfig = @{ value = @{} }
-                extensionAadJoinConfig = @{ value = $false }
-                extensionAntiMalwareConfig = @{ value = $false }
+                extensionAadJoinConfig = @{ value = @{} }
+                extensionAntiMalwareConfig = @{ 
+                  value = @{
+                    enabled = $false 
+                  }
+                }
                 extensionNetworkWatcherAgentConfig = @{ value = $false }
                 zone = @{ value = 0 }
                 osType = @{ value = 'Windows' }
