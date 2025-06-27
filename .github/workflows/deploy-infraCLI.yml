@@ -250,7 +250,7 @@ jobs:
                 backupPolicyName = @{ value = 'DefaultPolicy' }  
                 maintenanceConfigurationResourceId = @{ value = '' }
                 extensionDomainJoinPassword = @{ value = '' }
-                extensionDomainJoinConfig = @{ value = @() }
+                extensionDomainJoinConfig = @{ value = @{} }
                 extensionAadJoinConfig = @{ value = $false }
                 extensionAntiMalwareConfig = @{ value = $false }
                 extensionNetworkWatcherAgentConfig = @{ value = $false }
