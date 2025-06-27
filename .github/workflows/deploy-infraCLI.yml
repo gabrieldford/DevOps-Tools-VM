@@ -56,7 +56,7 @@ jobs:
     deploy-Managed-Identity:
       name: Deploy Managed Identity using Bicep
       runs-on: ubuntu-latest
-      needs: deploy-Vnet
+      needs: deploy-rg
       steps:
         - uses: actions/checkout@v3
 
@@ -78,7 +78,9 @@ jobs:
     deploy-KV:
       name: Deploy Key Vault using Bicep
       runs-on: ubuntu-latest
-      needs: deploy-Managed-Identity
+      needs: 
+        - deploy-Managed-Identity
+        - deploy-Vnet
       steps:
         - uses: actions/checkout@v3
 
