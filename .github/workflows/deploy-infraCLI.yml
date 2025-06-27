@@ -259,15 +259,17 @@ jobs:
                 osType = @{ value = 'Windows' }
                 disablePasswordAuthentication = @{ value = $false }
                 enableTelemetry = @{ value = $false }
-                sasTokenValidityLength = @{ value = 'PT8H' }
+                sasTokenValidityLength = @{ value 'PT8H' }
                 provisionVMAgent = @{ value = $false }
                 enableAutomaticUpdates = @{ value = $false }
                 patchMode = @{}
-                winRMListeners = @{}
                 bypassPlatformSafetyChecksOnUserSchedule = @{ value = $true }
                 rebootSetting = @{ value = 'IfRequired' }
                 patchAssessmentMode = @{ value = 'ImageDefault' }
+                EnableHotpatching = @{ value = $false }
                 additionalUnattendContent = @{}
+                winRMListeners = @{}
+                timeZone = 'Eastern Standard Time'
                 configurationProfile = @{ value = '' }
                 autoShutdownConfig = @{
                   value = @{
