@@ -216,8 +216,7 @@ jobs:
                     keyVault = @{ id = "/subscriptions/58a4a8cd-3b3b-4fcc-ad44-d7bf8c3df844/resourceGroups/DevOps-ToolsV2/providers/Microsoft.KeyVault/vaults/DevOps-gdf-Kv8" }
                     secretName = "DevOps-Vm-Secret"
                   }
-                }
-                priority = @{ value = '' }  
+                }  
                 evictionPolicy = @{ value = 'Deallocate' }
                 maxPriceForLowPriorityVm = @{ value = '' }
                 dedicatedHostId = @{ value = '' }
