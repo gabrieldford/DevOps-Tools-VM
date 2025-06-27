@@ -186,7 +186,7 @@ jobs:
                 name = @{ value = $env:VM_NAME }
                 vmSize = @{ value = $env:VM_SIZE }
                 encryptionAtHost = @{ value = $false }
-                securityType = @{}
+                securityType = @{ value = '' }
                 secureBootEnabled = @{ value = $false }
                 vTpmEnabled = @{ value = $false }
                 imageReference = @{
@@ -217,8 +217,8 @@ jobs:
                     secretName = "DevOps-Vm-Secret"
                   }
                 }
-                certificatesToBeInstalled = @{}
-                priority = @{}  
+                certificatesToBeInstalled = @{ value = [] }
+                priority = @{ value = '' }  
                 evictionPolicy = @{ value = 'Deallocate' }
                 maxPriceForLowPriorityVm = @{ value = '' }
                 dedicatedHostId = @{ value = '' }
@@ -245,7 +245,7 @@ jobs:
                     userAssignedResourceIds = "/subscriptions/58a4a8cd-3b3b-4fcc-ad44-d7bf8c3df844/resourcegroups/DevOps-ToolsV2/providers/Microsoft.ManagedIdentity/userAssignedIdentities/devOps-ToolsVm-identityV2"
                   }
                 }
-                galleryApplications = @{}
+                galleryApplications = @{ value = [] }
                 backupVaultName = @{ value = '' }
                 backupPolicyName = @{ value = 'DefaultPolicy' }  
                 maintenanceConfigurationResourceId = @{ value = '' }
@@ -254,7 +254,6 @@ jobs:
                 extensionAadJoinConfig = @{ value = $false }
                 extensionAntiMalwareConfig = @{ value = $false }
                 extensionNetworkWatcherAgentConfig = @{ value = $false }
-                lock = @{}
                 zone = @{ value = 0 }
                 osType = @{ value = 'Windows' }
                 disablePasswordAuthentication = @{ value = $false }
@@ -262,14 +261,14 @@ jobs:
                 sasTokenValidityLength = @{ value = 'PT8H' }
                 provisionVMAgent = @{ value = $false }
                 enableAutomaticUpdates = @{ value = $false }
-                patchMode = @{}
+                patchMode = @{ value = '' }
                 bypassPlatformSafetyChecksOnUserSchedule = @{ value = $true }
                 rebootSetting = @{ value = 'IfRequired' }
                 patchAssessmentMode = @{ value = 'ImageDefault' }
                 enableHotpatching = @{ value = $false }
-                additionalUnattendContent = @{}
-                winRMListeners = @{}
-                timeZone = 'Eastern Standard Time'
+                additionalUnattendContent = @{ value = [] }
+                winRMListeners = @{ value = [] }
+                timeZone = @{ value = 'Eastern Standard Time' }
                 configurationProfile = @{ value = '' }
                 autoShutdownConfig = @{
                   value = @{
