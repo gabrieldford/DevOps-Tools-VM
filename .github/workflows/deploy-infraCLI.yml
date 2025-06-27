@@ -240,7 +240,9 @@ jobs:
                 managedIdentities = @{
                   value = @{
                     systemAssigned = $true
-                    userAssignedResourceIds = "/subscriptions/58a4a8cd-3b3b-4fcc-ad44-d7bf8c3df844/resourcegroups/DevOps-ToolsV2/providers/Microsoft.ManagedIdentity/userAssignedIdentities/devOps-ToolsVm-identityV2"
+                    userAssignedResourceIds = @(
+                      "/subscriptions/58a4a8cd-3b3b-4fcc-ad44-d7bf8c3df844/resourcegroups/DevOps-ToolsV2/providers/Microsoft.ManagedIdentity/userAssignedIdentities/devOps-ToolsVm-identityV2"
+                    )
                   }
                 }
                 galleryApplications = @{ value = @() }
