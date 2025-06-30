@@ -79,7 +79,7 @@ param zones int[] = [] // Availability Zones are currently in preview and only a
 
 var enableReferencedModulesTelemetry = false
 
-var virtualNetworkResourceId = resourceId('Microsoft.Network/virtualNetworks', 'DevOps-NetworkV2') // The Virtual Network resource ID where the Azure Bastion Host will be deployed. This is a placeholder and should be replaced with the actual Virtual Network resource ID.
+var virtualNetworkResourceId = resourceId(resourceGroup().name, 'Microsoft.Network/virtualNetworks', 'DevOps-NetworkV2') // The Virtual Network resource ID where the Azure Bastion Host will be deployed. This is a placeholder and should be replaced with the actual Virtual Network resource ID.
 
 // ----------------------------------------------------------------------------
 // Prep ipConfigurations object AzureBastionSubnet for different uses cases:
