@@ -17,6 +17,7 @@ env:
   OS_DISK_CREATE_OPTION: FromImage
   OS_DISK_MANAGED_DISK_TYPE: Standard_LRS
   OS_DISK_SIZE_GB: 128
+  ADMIN_USERNAME: AzureUser
 permissions:
   contents: read
   id-token: write
@@ -221,10 +222,10 @@ jobs:
                 }
                 ultraSSDEnabled = @{ value = $false }
                 hibernationEnabled = @{ value = $false }  
-                adminUsername = @{ value = 'AzureUser' }
+                adminUsername = @{ value = $env:ADMIN_USERNAME }
                 adminPassword = @{
                   reference = @{
-                    keyVault = @{ id = "/subscriptions/58a4a8cd-3b3b-4fcc-ad44-d7bf8c3df844/resourceGroups/DevOps-ToolsV2/providers/Microsoft.KeyVault/vaults/DevOps-gdf-Kv8" }
+                    keyVault = @{ id = "/subscriptions/${{ secrets.AZURE_SUBSCRIPTION_ID }}/resourceGroups/$($env:RESOURCE_GROUP_NAME)/providers/Microsoft.KeyVault/vaults/$($env:KEY_VAULT_NAME)" }
                     secretName = "DevOps-Vm-Secret"
                   }
                 }  
