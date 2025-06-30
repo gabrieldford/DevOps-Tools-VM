@@ -197,10 +197,10 @@ jobs:
                 vTpmEnabled = @{ value = $false }
                 imageReference = @{
                   value = @{
-                    publisher = @{ value = $env:IMAGE_REF_PUBLISHER }
-                    offer = @{ value = $env:IMAGE_REF_OFFER }
-                    sku = @{ value = $env:IMAGE_REF_SKU }
-                    version = @{ value = $env:IMAGE_REF_VERSION }
+                    publisher = $env:IMAGE_REF_PUBLISHER
+                    offer = $env:IMAGE_REF_OFFER
+                    sku = $env:IMAGE_REF_SKU
+                    version = $env:IMAGE_REF_VERSION
                   } 
                 }
                 osDisk = @{
