@@ -7,8 +7,8 @@ param name string = 'DevOps-BastionV2'
 @description('Optional. Location for all resources.')
 param location string = resourceGroup().location
 
-@description('Required. Shared services Virtual Network resource Id.')
-param virtualNetworkResourceId string = '/subscriptions/58a4a8cd-3b3b-4fcc-ad44-d7bf8c3df844/resourceGroups/DevOps-ToolsV2/providers/Microsoft.Network/virtualNetworks/DevOps-NetworkV2'
+// @description('Required. Shared services Virtual Network resource Id.')
+// param virtualNetworkResourceId string = '/subscriptions/58a4a8cd-3b3b-4fcc-ad44-d7bf8c3df844/resourceGroups/DevOps-ToolsV2/providers/Microsoft.Network/virtualNetworks/DevOps-NetworkV2'
 
 @description('Optional. The Public IP resource ID to associate to the azureBastionSubnet. If empty, then the Public IP that is created as part of this module will be applied to the azureBastionSubnet. This parameter is ignored when enablePrivateOnlyBastion is true.')
 param bastionSubnetPublicIpResourceId string = ''
@@ -78,6 +78,8 @@ param enableTelemetry bool = true
 param zones int[] = [] // Availability Zones are currently in preview and only available in certain regions, therefore the default is an empty array.
 
 var enableReferencedModulesTelemetry = false
+
+var virtualNetworkResourceId = resourceId('Microsoft.Network/virtualNetworks', 'DevOps-NetworkV2') // The Virtual Network resource ID where the Azure Bastion Host will be deployed. This is a placeholder and should be replaced with the actual Virtual Network resource ID.
 
 // ----------------------------------------------------------------------------
 // Prep ipConfigurations object AzureBastionSubnet for different uses cases:
