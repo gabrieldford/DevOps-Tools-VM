@@ -264,7 +264,7 @@ jobs:
                   value = @{
                     systemAssigned = $true
                     userAssignedResourceIds = @(
-                      "/subscriptions/58a4a8cd-3b3b-4fcc-ad44-d7bf8c3df844/resourcegroups/DevOps-ToolsV2/providers/Microsoft.ManagedIdentity/userAssignedIdentities/devOps-ToolsVm-identityV2"
+                      "/subscriptions/${{ secrets.AZURE_SUBSCRIPTION_ID }}/resourcegroups/$($env:RESOURCE_GROUP_NAME)/providers/Microsoft.ManagedIdentity/userAssignedIdentities/$($env:MANAGED_IDENTITY_NAME)"
                     )
                   }
                 }
