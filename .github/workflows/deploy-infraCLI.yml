@@ -8,6 +8,10 @@ env:
   KEY_VAULT_NAME: DevOps-gdf-Kv8
   VM_NAME: DevOps-ToolsVm
   VM_SIZE: Standard_D2s_v3
+  IMAGE_REF_PUBLISHER: MicrosoftWindowsDesktop
+  IMAGE_REF_OFFER: windows-11
+  IMAGE_REF_SKU: win11-24h2-pro
+  IMAGE_REF_VERSION: latest
 permissions:
   contents: read
   id-token: write
@@ -193,10 +197,10 @@ jobs:
                 vTpmEnabled = @{ value = $false }
                 imageReference = @{
                   value = @{
-                    publisher = 'MicrosoftWindowsDesktop'
-                    offer = 'windows-11'
-                    sku = 'win11-24h2-pro'
-                    version = 'latest'
+                    publisher = @{ value = $env:IMAGE_REF_PUBLISHER }
+                    offer = @{ value = $env:IMAGE_REF_OFFER }
+                    sku = @{ value = $env:IMAGE_REF_SKU }
+                    version = @{ value = $env:IMAGE_REF_VERSION }
                   } 
                 }
                 osDisk = @{
