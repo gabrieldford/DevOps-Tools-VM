@@ -12,6 +12,11 @@ env:
   IMAGE_REF_OFFER: windows-11
   IMAGE_REF_SKU: win11-24h2-pro
   IMAGE_REF_VERSION: latest
+  OS_DISK_NAME: osDisk
+  OS_DISK_CACHING: ReadWrite
+  OS_DISK_CREATE_OPTION: FromImage
+  OS_DISK_MANAGED_DISK_TYPE: Standard_LRS
+  OS_DISK_SIZE_GB: 128
 permissions:
   contents: read
   id-token: write
@@ -205,13 +210,13 @@ jobs:
                 }
                 osDisk = @{
                   value = @{
-                    name = 'osDisk'
-                    caching = 'ReadWrite'
-                    createOption = 'FromImage'
+                    name = $env:OS_DISK_NAME
+                    caching = $env:OS_DISK_CACHING
+                    createOption = $env:OS_DISK_CREATE_OPTION
                     managedDisk = @{
-                      storageAccountType = 'Standard_LRS'
+                      storageAccountType = $env:OS_DISK_MANAGED_DISK_TYPE
                     }
-                    diskSizeGB = 128
+                    diskSizeGB = $env:OS_DISK_SIZE_GB
                   }
                 }
                 ultraSSDEnabled = @{ value = $false }
