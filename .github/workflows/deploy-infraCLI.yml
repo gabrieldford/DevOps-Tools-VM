@@ -18,6 +18,11 @@ env:
   OS_DISK_MANAGED_DISK_TYPE: Standard_LRS
   OS_DISK_SIZE_GB: 128
   ADMIN_USERNAME: AzureUser
+  EVICTION_POLICY: Deallocate
+  max_PRICE_FOR_LOW_PRIORITY_VM: ""
+  DEDICATED_HOST_ID: ""
+  LICENSE_TYPE: ""
+
 permissions:
   contents: read
   id-token: write
@@ -229,10 +234,10 @@ jobs:
                     secretName = "DevOps-Vm-Secret"
                   }
                 }  
-                evictionPolicy = @{ value = 'Deallocate' }
-                maxPriceForLowPriorityVm = @{ value = '' }
-                dedicatedHostId = @{ value = '' }
-                licenseType = @{ value = '' }
+                evictionPolicy = @{ value = $env:EVICTION_POLICY }
+                maxPriceForLowPriorityVm = @{ value = $env:max_PRICE_FOR_LOW_PRIORITY_VM }
+                dedicatedHostId = @{ value = $env:DEDICATED_HOST_ID }
+                licenseType = @{ value = $env:LICENSE_TYPE }
                 publicKeys = @{ value = @() }
                 nicConfigurations = @{
                   value = @(
