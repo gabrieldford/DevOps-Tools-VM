@@ -216,7 +216,7 @@ jobs:
                     managedDisk = @{
                       storageAccountType = $env:OS_DISK_MANAGED_DISK_TYPE
                     }
-                    diskSizeGB = $env:OS_DISK_SIZE_GB
+                    diskSizeGB = [int]$env:OS_DISK_SIZE_GB
                   }
                 }
                 ultraSSDEnabled = @{ value = $false }
