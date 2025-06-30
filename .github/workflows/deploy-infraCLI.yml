@@ -27,6 +27,11 @@ env:
   IP_CONFIG_IP_VERSION: IPv4
   IP_CONFIG_VNET_NAME: DevOps-NetworkV2
   IP_CONFIG_SUBNET_NAME: DevSubnet
+  BACKUP_VAULT_NAME: ""
+  BACKUP_POLICY_NAME: DefaultPolicy
+  MAINTENANCE_CONFIG_RID: ""
+  EXTENSION_DOMAIN_JOIN_PASSWORD: ""
+
 
 
 permissions:
@@ -269,10 +274,10 @@ jobs:
                   }
                 }
                 galleryApplications = @{ value = @() }
-                backupVaultName = @{ value = '' }
-                backupPolicyName = @{ value = 'DefaultPolicy' }  
-                maintenanceConfigurationResourceId = @{ value = '' }
-                extensionDomainJoinPassword = @{ value = '' }
+                backupVaultName = @{ value = $env:BACKUP_VAULT_NAME }
+                backupPolicyName = @{ value = $env:BACKUP_POLICY_NAME }  
+                maintenanceConfigurationResourceId = @{ value = $env:MAINTENANCE_CONFIG_RID }
+                extensionDomainJoinPassword = @{ value = $env:EXTENSION_DOMAIN_JOIN_PASSWORD }
                 extensionDomainJoinConfig = @{ value = @{} }
                 extensionAadJoinConfig = @{ 
                   value = @{
