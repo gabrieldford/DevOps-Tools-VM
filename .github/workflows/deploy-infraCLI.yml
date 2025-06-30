@@ -31,6 +31,22 @@ env:
   BACKUP_POLICY_NAME: DefaultPolicy
   MAINTENANCE_CONFIG_RID: ""
   EXTENSION_DOMAIN_JOIN_PASSWORD: ""
+  ZONE: 0
+  OS_TYPE: Windows
+  SAS_TOKEN_VALIDITY_LENGTH: PT8H
+  PATCH_MODE: ""
+  REBOOT_SETTING: IfRequired
+  PATCH_ASSESSMENT_MODE: ImageDefault
+  TIME_ZONE: Eastern Standard Time
+  CONFIGURATION_PROFILE: ""
+  AUTO_SHUTDOWN_STATUS: Enabled
+  AUTO_SHUTDOWN_TIMEZONE: Eastern Standard Time
+  AUTO_SHUTDOWN_DAILY_RECURRENCE_TIME: '22:00'
+  AUTO_SHUTDOWN_NOTIFICATION_STATUS: Enabled
+  AUTO_SHUTDOWN_EMAIL_RECIPIENT: gabrielford@microsoft.com
+  AUTO_SHUTDOWN_EMAIL_STATUS: Enabled
+  AUTO_SHUTDOWN_WEBHOOK_RESOURCE_ID: ""
+
 
 
 
@@ -289,32 +305,32 @@ jobs:
                     enabled = $false 
                   }
                 }
-                zone = @{ value = 0 }
-                osType = @{ value = 'Windows' }
+                zone = @{ value = [int]$env:ZONE }
+                osType = @{ value = $env:OS_TYPE }
                 disablePasswordAuthentication = @{ value = $false }
                 enableTelemetry = @{ value = $false }
-                sasTokenValidityLength = @{ value = 'PT8H' }
+                sasTokenValidityLength = @{ value = $env:SAS_TOKEN_VALIDITY_LENGTH }
                 provisionVMAgent = @{ value = $false }
                 enableAutomaticUpdates = @{ value = $false }
-                patchMode = @{ value = '' }
+                patchMode = @{ value = $env:PATCH_MODE }
                 bypassPlatformSafetyChecksOnUserSchedule = @{ value = $true }
-                rebootSetting = @{ value = 'IfRequired' }
-                patchAssessmentMode = @{ value = 'ImageDefault' }
+                rebootSetting = @{ value = $env:REBOOT_SETTING }
+                patchAssessmentMode = @{ value = $env:PATCH_ASSESSMENT_MODE }
                 enableHotpatching = @{ value = $false }
                 additionalUnattendContent = @{ value = @() }
                 winRMListeners = @{ value = @() }
-                timeZone = @{ value = 'Eastern Standard Time' }
-                configurationProfile = @{ value = '' }
+                timeZone = @{ value = $env:TIME_ZONE }
+                configurationProfile = @{ value = $env:CONFIGURATION_PROFILE }
                 autoShutdownConfig = @{
                   value = @{
-                    status = 'Enabled'
-                    timezone = 'Eastern Standard Time'
-                    dailyRecurrenceTime = '22:00'
+                    status = $env:AUTO_SHUTDOWN_STATUS
+                    timezone = $env:AUTO_SHUTDOWN_TIMEZONE
+                    dailyRecurrenceTime = $env:AUTO_SHUTDOWN_DAILY_RECURRENCE_TIME
                     notificationSettings = @{
-                      status = 'Enabled'
-                      emailRecipient = 'gabrielford@microsoft.com'
-                      emailStatus = 'Enabled'
-                      webhookResourceId = ''
+                      status = $env:AUTO_SHUTDOWN_NOTIFICATION_STATUS
+                      emailRecipient = $env:AUTO_SHUTDOWN_EMAIL_RECIPIENT
+                      emailStatus = $env:AUTO_SHUTDOWN_EMAIL_STATUS
+                      webhookResourceId = $env:AUTO_SHUTDOWN_WEBHOOK_RESOURCE_ID
                     }
                   }
                 }
