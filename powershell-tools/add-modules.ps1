@@ -1,6 +1,6 @@
 # Define the folder to add to the sparse checkout. This is the folder in the remote repository. In this instance it is in the Azure Verifiied Modules (AVM) repository.
 # Example: "avm/res/key-vault/access-policy"
-$folderToAdd = "avm/res/managed-identity/user-assigned-identity"
+$folderToAdd = "avm/res/storage/storage-account"
 
 # Optional: change to your local Git repo path
 $repoPath = "../bicep-registry-modules"
