@@ -3,7 +3,7 @@ metadata description = 'This module deploys a Storage Account.'
 
 @maxLength(24)
 @description('Required. Name of the Storage Account. Must be lower-case.')
-param name string = 'gdfs${uniqueString(deployment().name, location)}'
+param name string = 'devops${uniqueString(deployment().name, location)}'
 
 @description('Optional. Location for all resources.')
 param location string = resourceGroup().location
@@ -15,6 +15,24 @@ param roleAssignments roleAssignmentType[] = [
     principalId: '75e8c793-8646-411a-b342-7a1a4c53620d'
     roleDefinitionIdOrName: 'Storage Blob Data Owner'
     description: 'Storage Blob Data Owner role assignment for the Storage Account.'
+    principalType: 'User'
+  }
+  {
+    principalId: '75e8c793-8646-411a-b342-7a1a4c53620d'
+    roleDefinitionIdOrName: 'Owner'
+    description: 'Storage Account Owner role assignment for the Storage Account.'
+    principalType: 'User'
+  }
+  {
+    principalId: 'a8e0409b-f199-4a22-a028-3d3146bc469c'
+    roleDefinitionIdOrName: 'Storage Account Contributor'
+    description: 'Storage Account Contributor role assignment for the Storage Account.'
+    principalType: 'User'
+  }
+  {
+    principalId: 'a8e0409b-f199-4a22-a028-3d3146bc469c'
+    roleDefinitionIdOrName: 'Storage Blob Data Contributor'
+    description: 'Storage Blob Data Contributor role assignment for the Storage Account.'
     principalType: 'User'
   }
 ]
@@ -76,7 +94,17 @@ param allowSharedKeyAccess bool = false
 
 import { privateEndpointMultiServiceType } from 'br/public:avm/utl/types/avm-common-types:0.5.1'
 @description('Optional. Configuration details for private endpoints. For security reasons, it is recommended to use private endpoints whenever possible.')
-param privateEndpoints privateEndpointMultiServiceType[]?
+param privateEndpoints privateEndpointMultiServiceType[] = [
+  {
+    name: 'devops-str-blob-pe'
+    location: location
+    service: 'blob'
+    subnetResourceId: '/subscriptions/58a4a8cd-3b3b-4fcc-ad44-d7bf8c3df844/resourceGroups/DevOps-ToolsV2/providers/Microsoft.Network/virtualNetworks/DevOps-NetworkV2/subnets/DevSubnet'
+    resourceGroupResourceId: '/subscriptions/58a4a8cd-3b3b-4fcc-ad44-d7bf8c3df844/resourceGroups/DevOps-ToolsV2'
+    isManualConnection: false
+    privateLinkServiceConnectionName: 'blob-connection'
+  }
+]
 
 @description('Optional. The Storage Account ManagementPolicies Rules.')
 param managementPolicyRules array?
