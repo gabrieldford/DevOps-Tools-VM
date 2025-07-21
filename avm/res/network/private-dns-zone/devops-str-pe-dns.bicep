@@ -7,11 +7,11 @@ param name string = 'privatelink.blob.core.windows.net'
 @description('Optional. Array of A records.')
 param a aType[] = [
   {
-    name: 'devops-str-blob-pe'
+    name: 'devopsgdftest'
     ttl: 10
     aRecords: [
       {
-        ipv4Address: '10.0.0.5'
+        ipv4Address: '10.0.0.6'
       }
     ]
   }

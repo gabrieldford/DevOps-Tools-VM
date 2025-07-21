@@ -3,7 +3,7 @@ metadata description = 'This module deploys a Storage Account.'
 
 @maxLength(24)
 @description('Required. Name of the Storage Account. Must be lower-case.')
-param name string = 'devops${uniqueString(deployment().name, location)}'
+param name string = 'devopsgdftest'
 
 @description('Optional. Location for all resources.')
 param location string = resourceGroup().location
@@ -96,7 +96,7 @@ import { privateEndpointMultiServiceType } from 'br/public:avm/utl/types/avm-com
 @description('Optional. Configuration details for private endpoints. For security reasons, it is recommended to use private endpoints whenever possible.')
 param privateEndpoints privateEndpointMultiServiceType[] = [
   {
-    name: 'devops-str-blob-pe'
+    name: '${name}-devops-str-blob-pe'
     location: location
     service: 'blob'
     subnetResourceId: '/subscriptions/58a4a8cd-3b3b-4fcc-ad44-d7bf8c3df844/resourceGroups/DevOps-ToolsV2/providers/Microsoft.Network/virtualNetworks/DevOps-NetworkV2/subnets/DevSubnet'
@@ -200,7 +200,7 @@ param allowedCopyScope string?
   'Enabled'
   'Disabled'
 ])
-param publicNetworkAccess string = 'Enabled'
+param publicNetworkAccess string = 'Disabled'
 
 @description('Optional. Allows HTTPS traffic only to storage service if sets to true.')
 param supportsHttpsTrafficOnly bool = true
