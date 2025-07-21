@@ -16,5 +16,5 @@ New-AzResourceGroupDeployment `
   -Name $deploymentName `
   -ResourceGroupName $resourceGroupName `
   -Location $deploymentLocation `
-  -TemplateFile $templateFile `
+  -TemplateFile $templateFile 
  # -TemplateParameterFile $parametersFile
