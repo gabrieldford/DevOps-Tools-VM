@@ -7,7 +7,7 @@ param name string = 'privatelink.blob.core.windows.net'
 @description('Optional. Array of A records.')
 param a aType[] = [
   {
-    name: 'devopsgdftest'
+    name: 'devopsgdftestv2'
     ttl: 10
     aRecords: [
       {
