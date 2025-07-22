@@ -3,7 +3,7 @@ metadata description = 'This module deploys a Storage Account.'
 
 @maxLength(24)
 @description('Required. Name of the Storage Account. Must be lower-case.')
-param name string = 'devopsgdftest'
+param name string = 'devopsgdftestv2'
 
 @description('Optional. Location for all resources.')
 param location string = resourceGroup().location

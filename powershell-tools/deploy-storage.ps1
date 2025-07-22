@@ -18,3 +18,6 @@ New-AzResourceGroupDeployment `
   -Location $deploymentLocation `
   -TemplateFile $templateFile 
  # -TemplateParameterFile $parametersFile
+
+
+
