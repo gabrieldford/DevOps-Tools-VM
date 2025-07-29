@@ -103,6 +103,16 @@ param privateEndpoints privateEndpointMultiServiceType[] = [
     resourceGroupResourceId: '/subscriptions/58a4a8cd-3b3b-4fcc-ad44-d7bf8c3df844/resourceGroups/DevOps-ToolsV2'
     isManualConnection: false
     privateLinkServiceConnectionName: 'blob-connection'
+    ipConfigurations: [
+      {
+        name: 'ipconfig1'
+        properties: {
+          groupId: 'blob'
+          memberName: 'blob'
+          privateIPAddress: '10.0.0.6'
+        }
+      }
+    ]
   }
 ]
 

@@ -26,3 +26,11 @@ jobs:
               --template-file './avm/res/storage/storage-account/devops-str.bicep' \
               --debug
 
+        - name: Deploy Storage Account Private DNS Zone
+          run: |
+            az deployment group create \
+              --name 'storageDeploymentprivateDns' \
+              --resource-group 'DevOps-ToolsV2' \
+              --template-file './avm/res/storage/storage-account/devops-storage-dns.bicep' \
+              --debug              
+
