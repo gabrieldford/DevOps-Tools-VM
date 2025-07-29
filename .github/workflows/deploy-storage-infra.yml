@@ -27,7 +27,7 @@ jobs:
               --name 'storageDeployment' \
               --resource-group 'DevOps-ToolsV2' \
               --parameters \
-                name=$STORAGE_ACCOUNT_NAME \
+                strname=$STORAGE_ACCOUNT_NAME \
                 strPeIpAddress=$STORAGE_ACCOUNT_PE_IP \
               --template-file './avm/res/storage/storage-account/devops-str.bicep' \
               --debug
@@ -39,7 +39,7 @@ jobs:
               --resource-group 'DevOps-ToolsV2' \
               --template-file './avm/res/network/private-dns-zone/devops-str-pe-dns.bicep' \
               --parameters \
-                name=$STORAGE_ACCOUNT_NAME \
+                strname=$STORAGE_ACCOUNT_NAME \
                 strPeIpAddress=$STORAGE_ACCOUNT_PE_IP \
               --debug              
 

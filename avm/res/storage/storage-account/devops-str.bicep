@@ -3,7 +3,7 @@ metadata description = 'This module deploys a Storage Account.'
 
 @maxLength(24)
 @description('Required. Name of the Storage Account. Must be lower-case.')
-param name string = 'devopsgdftestv2'
+param strname string = 'devopsgdftestv2'
 
 @description('Optional. Location for all resources.')
 param location string = resourceGroup().location
@@ -99,7 +99,7 @@ import { privateEndpointMultiServiceType } from 'br/public:avm/utl/types/avm-com
 @description('Optional. Configuration details for private endpoints. For security reasons, it is recommended to use private endpoints whenever possible.')
 param privateEndpoints privateEndpointMultiServiceType[] = [
   {
-    name: '${name}-devops-str-blob-pe'
+    name: '${strname}-devops-str-blob-pe'
     location: location
     service: 'blob'
     subnetResourceId: '/subscriptions/58a4a8cd-3b3b-4fcc-ad44-d7bf8c3df844/resourceGroups/DevOps-ToolsV2/providers/Microsoft.Network/virtualNetworks/DevOps-NetworkV2/subnets/DevSubnet'
@@ -400,7 +400,7 @@ resource cMKUserAssignedIdentity 'Microsoft.ManagedIdentity/userAssignedIdentiti
 }
 
 resource storageAccount 'Microsoft.Storage/storageAccounts@2024-01-01' = {
-  name: name
+  name: strname
   location: location
   kind: kind
   sku: {
@@ -505,7 +505,7 @@ resource storageAccount 'Microsoft.Storage/storageAccounts@2024-01-01' = {
 
 resource storageAccount_diagnosticSettings 'Microsoft.Insights/diagnosticSettings@2021-05-01-preview' = [
   for (diagnosticSetting, index) in (diagnosticSettings ?? []): {
-    name: diagnosticSetting.?name ?? '${name}-diagnosticSettings'
+    name: diagnosticSetting.?name ?? '${strname}-diagnosticSettings'
     properties: {
       storageAccountId: diagnosticSetting.?storageAccountResourceId
       workspaceId: diagnosticSetting.?workspaceResourceId
@@ -526,7 +526,7 @@ resource storageAccount_diagnosticSettings 'Microsoft.Insights/diagnosticSetting
 ]
 
 resource storageAccount_lock 'Microsoft.Authorization/locks@2020-05-01' = if (!empty(lock ?? {}) && lock.?kind != 'None') {
-  name: lock.?name ?? 'lock-${name}'
+  name: lock.?name ?? 'lock-${strname}'
   properties: {
     level: lock.?kind ?? ''
     notes: lock.?kind == 'CanNotDelete'

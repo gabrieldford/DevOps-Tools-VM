@@ -4,14 +4,20 @@ metadata description = 'This module deploys a Private DNS zone.'
 @description('Required. Private DNS zone name.')
 param name string = 'privatelink.blob.core.windows.net'
 
+@description('Name of the storage account. Needed for the A record. Passed in from the Yaml pipeline.')
+param strname string
+
+@description('Required. The private IP address of the storage account for the A record. Passed in from the Yaml pipeline.')
+param strPeIpAddress string
+
 @description('Optional. Array of A records.')
 param a aType[] = [
   {
-    name: 'devopsgdftestv2'
+    name: strname
     ttl: 10
     aRecords: [
       {
-        ipv4Address: '10.0.0.6'
+        ipv4Address: strPeIpAddress
       }
     ]
   }
