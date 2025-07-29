@@ -26,7 +26,7 @@ jobs:
             az deployment group create \
               --name 'storageDeployment' \
               --resource-group 'DevOps-ToolsV2' \
-              --parameters \ 
+              --parameters \
                 name=$STORAGE_ACCOUNT_NAME \
                 strPeIpAddress=$STORAGE_ACCOUNT_PE_IP \
               --template-file './avm/res/storage/storage-account/devops-str.bicep' \
