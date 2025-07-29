@@ -31,6 +31,6 @@ jobs:
             az deployment group create \
               --name 'storageDeploymentprivateDns' \
               --resource-group 'DevOps-ToolsV2' \
-              --template-file './avm/res/storage/storage-account/devops-storage-dns.bicep' \
+              --template-file './avm/res/network/private-dns-zone/devops-str-pe-dns.bicep' \
               --debug              
 
