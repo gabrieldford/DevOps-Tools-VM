@@ -92,6 +92,9 @@ param defaultToOAuthAuthentication bool = false
 @description('Optional. Indicates whether the storage account permits requests to be authorized with the account access key via Shared Key. If false, then all requests, including shared access signatures, must be authorized with Azure Active Directory (Azure AD). The default value is null, which is equivalent to true.')
 param allowSharedKeyAccess bool = false
 
+@description('Optional. IP address from the yaml pipeline to use for the private endpoint. This ensures that the private endpoint IP address and the DNS Ip address are the same.')
+param strPeIpAddress string  
+
 import { privateEndpointMultiServiceType } from 'br/public:avm/utl/types/avm-common-types:0.5.1'
 @description('Optional. Configuration details for private endpoints. For security reasons, it is recommended to use private endpoints whenever possible.')
 param privateEndpoints privateEndpointMultiServiceType[] = [
@@ -109,7 +112,7 @@ param privateEndpoints privateEndpointMultiServiceType[] = [
         properties: {
           groupId: 'blob'
           memberName: 'blob'
-          privateIPAddress: '10.0.0.6'
+          privateIPAddress: strPeIpAddress
         }
       }
     ]

@@ -3,6 +3,7 @@ on: [workflow_dispatch]
 
 env:
   STORAGE_ACCOUNT_NAME: 'devopsgdftestv3'
+  STORAGE_ACCOUNT_PE_IP: '10.0.0.6'
 
 
 permissions:
@@ -25,7 +26,9 @@ jobs:
             az deployment group create \
               --name 'storageDeployment' \
               --resource-group 'DevOps-ToolsV2' \
-              --parameters name=$STORAGE_ACCOUNT_NAME \
+              --parameters \ 
+                name=$STORAGE_ACCOUNT_NAME \
+                strPeIpAddress=$STORAGE_ACCOUNT_PE_IP \
               --template-file './avm/res/storage/storage-account/devops-str.bicep' \
               --debug
 
