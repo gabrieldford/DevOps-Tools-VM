@@ -1,6 +1,8 @@
 name: Deploy Storage Infrastructure
 on: [workflow_dispatch]
 
+env:
+  STORAGE_ACCOUNT_NAME: 'devopsgdftestv3'
 
 
 permissions:
@@ -23,6 +25,7 @@ jobs:
             az deployment group create \
               --name 'storageDeployment' \
               --resource-group 'DevOps-ToolsV2' \
+              --parameters name=$STORAGE_ACCOUNT_NAME \
               --template-file './avm/res/storage/storage-account/devops-str.bicep' \
               --debug
 
