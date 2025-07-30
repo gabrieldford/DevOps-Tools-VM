@@ -401,6 +401,7 @@ jobs:
               --parameters \
                 strname=${{ env.STORAGE_ACCOUNT_NAME }} \
                 strPeIpAddress=${{ env.STORAGE_ACCOUNT_PE_IP }} \
+                managedIdentityPrincipalId=$PRINCIPAL_ID \
               --template-file './avm/res/storage/storage-account/devops-str.bicep' \
               --debug
 
