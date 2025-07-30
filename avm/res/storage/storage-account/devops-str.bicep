@@ -8,6 +8,9 @@ param strname string = 'devopsgdftestv2'
 @description('Optional. Location for all resources.')
 param location string = resourceGroup().location
 
+@description('Optional. This is the principalId of the Managed Identity that will be used by the VM to access the Storage Account.')
+param managedIdentityPrincipalId string
+
 import { roleAssignmentType } from 'br/public:avm/utl/types/avm-common-types:0.5.1'
 @description('Optional. Array of role assignments to create.')
 param roleAssignments roleAssignmentType[] = [
@@ -34,6 +37,12 @@ param roleAssignments roleAssignmentType[] = [
     roleDefinitionIdOrName: 'Storage Blob Data Contributor'
     description: 'Storage Blob Data Contributor role assignment for the Storage Account.'
     principalType: 'User'
+  }
+  {
+    principalId: managedIdentityPrincipalId
+    roleDefinitionIdOrName: 'Storage Blob Data Reader'
+    description: 'Storage Blob Data Reader role assignment for the Storage Account.'
+    principalType: 'ServicePrincipal'
   }
 ]
 

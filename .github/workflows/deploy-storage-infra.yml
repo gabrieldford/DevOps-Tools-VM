@@ -4,7 +4,8 @@ on: [workflow_dispatch]
 env:
   STORAGE_ACCOUNT_NAME: 'devopsgdftestv3'
   STORAGE_ACCOUNT_PE_IP: '10.0.0.6'
-
+  MANAGED_IDENTITY_NAME: 'devOps-ToolsVm-identityV2'
+  RESOURCE_GROUP_NAME: 'DevOps-ToolsV2'
 
 permissions:
   contents: read
@@ -21,6 +22,15 @@ jobs:
             tenant-id: ${{ secrets.AZURE_TENANT_ID }}
             subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
         
+        - name: Get Managed Identity principalId and set as environment variable
+          id: get-mi
+          run: |
+            MI_NAME="${{ env.MANAGED_IDENTITY_NAME }}"
+            RG_NAME="${{ env.RESOURCE_GROUP_NAME }}"
+
+            PRINCIPAL_ID=$(az identity show --name "$MI_NAME" --resource-group "$RG_NAME" --query 'principalId' -o tsv)
+
+            echo "PRINCIPAL_ID=$PRINCIPAL_ID" >> $GITHUB_ENV     
         - name: Deploy Storage Account
           run: |
             az deployment group create \
@@ -29,6 +39,7 @@ jobs:
               --parameters \
                 strname=$STORAGE_ACCOUNT_NAME \
                 strPeIpAddress=$STORAGE_ACCOUNT_PE_IP \
+                managedIdentityPrincipalId=$PRINCIPAL_ID \
               --template-file './avm/res/storage/storage-account/devops-str.bicep' \
               --debug
 
