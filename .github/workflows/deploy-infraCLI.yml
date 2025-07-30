@@ -5,7 +5,7 @@ env:
   RESOURCE_GROUP_NAME: DevOps-ToolsV2
   LOCATION: eastus
   MANAGED_IDENTITY_NAME: devOps-ToolsVm-identityV2
-  KEY_VAULT_NAME: DevOps-gdf-Kv9
+  KEY_VAULT_NAME: DevOps-gdf-Kv10
   VM_NAME: DevOps-ToolsVm
   VM_SIZE: Standard_D2s_v3
   IMAGE_REF_PUBLISHER: MicrosoftWindowsDesktop
