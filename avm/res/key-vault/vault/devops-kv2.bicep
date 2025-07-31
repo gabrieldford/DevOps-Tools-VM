@@ -15,10 +15,10 @@ param name string
 param location string = resourceGroup().location
 
 @description('Optional. Added not part of the original AVM. This subnet comes from the pipeline and is used to create the private endpoint for the Key Vault.')
-param subnetName string = 'DevSubnet'
+param subnetName string
 
 @description('Optional. Added not part of the original AVM. The IP address of the private endpoint for the Key Vault. This is used to create the private endpoint for the Key Vault.')
-param keyVaultPrivateEndpointIp string = '10.0.0.7'
+param keyVaultPrivateEndpointIp string
 
 @description('Optional. All access policies to create.')
 param accessPolicies accessPolicyType[]?
