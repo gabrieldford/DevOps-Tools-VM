@@ -61,7 +61,17 @@ param enablePurgeProtection bool = true
 param sku string = 'standard'
 
 @description('Optional. Rules governing the accessibility of the resource from specific network locations.')
-param networkAcls object?
+param networkAcls object = {
+  bypass: 'AzureServices'
+  defaultAction: 'Deny'
+  virtualNetworkRules: []
+  ipRules: [
+    {
+      value: '108.51.206.23'
+      action: 'Allow'
+    }
+  ]
+}
 
 @description('Optional. Whether or not public network access is allowed for this resource. For security reasons it should be disabled. If not specified, it will be disabled by default if private endpoints are set and networkAcls are not set.')
 @allowed([
