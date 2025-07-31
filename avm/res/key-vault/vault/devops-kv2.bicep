@@ -93,7 +93,7 @@ param privateEndpoints privateEndpointSingleServiceType[] = [
         name: '${name}-devops-kv2-ipconfig'
         properties: {
           groupId: 'vault'
-          memberName: 'keyVault'
+          memberName: 'default'
           privateIPAddress: keyVaultPrivateEndpointIp
         }
       }
