@@ -85,7 +85,7 @@ param privateEndpoints privateEndpointSingleServiceType[] = [
   {
     name: '${name}-devops-kv2-pe'
     service: 'vault'
-    subnetResourceId: resourceId('Microsoft.Network/virtualNetworks/subnets', resourceGroup().name, subnetName)
+    subnetResourceId: resourceId('Microsoft.Network/virtualNetworks/subnets', 'DevOps-NetworkV2', subnetName)
     isManualConnection: false
     privateLinkServiceConnectionName: 'keyVault-connection'
     ipConfigurations: [
