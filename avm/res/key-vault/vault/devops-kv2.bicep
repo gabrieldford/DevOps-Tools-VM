@@ -14,6 +14,12 @@ param name string
 @description('Optional. Location for all resources.')
 param location string = resourceGroup().location
 
+@description('Optional. Added not part of the original AVM. This subnet comes from the pipeline and is used to create the private endpoint for the Key Vault.')
+param subnetName string = 'DevSubnet'
+
+@description('Optional. Added not part of the original AVM. The IP address of the private endpoint for the Key Vault. This is used to create the private endpoint for the Key Vault.')
+param keyVaultPrivateEndpointIp string = '10.0.0.7'
+
 @description('Optional. All access policies to create.')
 param accessPolicies accessPolicyType[]?
 
@@ -75,7 +81,27 @@ param roleAssignments roleAssignmentType[]?
 
 import { privateEndpointSingleServiceType } from 'br/public:avm/utl/types/avm-common-types:0.5.1'
 @description('Optional. Configuration details for private endpoints. For security reasons, it is recommended to use private endpoints whenever possible.')
-param privateEndpoints privateEndpointSingleServiceType[]?
+param privateEndpoints privateEndpointSingleServiceType[] = [
+  {
+    name: '${name}-devops-kv2-pe'
+    service: 'vault'
+    subnetResourceId: resourceId('Microsoft.Network/virtualNetworks/subnets', resourceGroup().name, subnetName)
+    isManualConnection: false
+    privateLinkServiceConnectionName: 'keyVault-connection'
+    ipConfigurations: [
+      {
+        name: '${name}-devops-kv2-ipconfig'
+        properties: {
+          groupId: 'vault'
+          memberName: 'keyVault'
+          privateIPAddress: keyVaultPrivateEndpointIp
+        }
+      }
+    ]
+    customDnsConfigs: []
+    roleAssignments: []
+  }
+]
 
 @description('Optional. Resource tags.')
 param tags object?
