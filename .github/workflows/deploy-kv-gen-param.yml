@@ -114,10 +114,6 @@ jobs:
             --resource-group 'DevOps-ToolsV2' \
             --template-file 'avm/res/key-vault/vault/devops-kv2.bicep' \
             --parameters @kv.params.json \
-            --parameters \
-              location=${{ env.LOCATION }} \
-              subnetName=${{ env.SUBNET_NAME }} \
-              keyVaultPrivateEndpointIp=${{ env.KEY_VAULT_PE_IP }} \
             --only-show-errors  
 
       - name: Deploy Key Vault Private DNS Zone

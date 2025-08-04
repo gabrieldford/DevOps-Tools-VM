@@ -21,6 +21,9 @@
         }
       ]
     },
+    "publicNetworkAccess": {
+      "value": "Disabled"
+    },
     "roleAssignments": {
       "value": [
         {
