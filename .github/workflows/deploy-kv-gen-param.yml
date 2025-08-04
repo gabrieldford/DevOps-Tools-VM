@@ -59,6 +59,12 @@ jobs:
               name = @{
                 value = $env:KEY_VAULT_NAME
               }
+              subnetName = @{
+                value = $env:SUBNET_NAME
+              }
+              keyVaultPrivateEndpointIp = @{
+                value = $env:KEY_VAULT_PE_IP
+              }
               secrets = @{
                 value = @(
                   @{
