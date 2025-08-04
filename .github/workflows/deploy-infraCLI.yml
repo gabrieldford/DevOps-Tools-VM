@@ -216,6 +216,17 @@ jobs:
               --parameters @kv.params.json \
               --only-show-errors  
 
+        - name: Deploy Key Vault Private DNS Zone
+          run: |
+            az deployment group create \
+              --name 'kvDeploymentprivateDns' \
+              --resource-group ${{ env.RESOURCE_GROUP_NAME }} \
+              --template-file './avm/res/network/private-dns-zone/devops-kv-pe-dns.bicep' \
+              --parameters \
+                kvname=${{ env.KEY_VAULT_NAME }} \
+                kvPeIpAddress=${{ env.KEY_VAULT_PE_IP }} \
+              --debug 
+
     deploy-VM:               
       name: Deploy VM using Bicep
       runs-on: ubuntu-latest
