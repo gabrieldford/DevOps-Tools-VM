@@ -205,7 +205,6 @@ jobs:
               --resource-group ${{ env.RESOURCE_GROUP_NAME }} \
               --template-file './avm/res/key-vault/vault/devops-kv2.bicep' \
               --parameters @kv.params.json \
-              --parameters 
               --debug
 
         - name: Deploy Key Vault using BICEP
