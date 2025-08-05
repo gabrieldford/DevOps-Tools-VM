@@ -6,7 +6,7 @@ env:
   LOCATION: eastus
   SUBNET_NAME: DevSubnet
   MANAGED_IDENTITY_NAME: devOps-ToolsVm-identityV2
-  KEY_VAULT_NAME: DevOps-gdf-Kv12
+  KEY_VAULT_NAME: DevOps-gdf-Kv13
   KEY_VAULT_PE_IP: '10.0.0.7'
   VM_NAME: DevOps-ToolsVm
   VM_SIZE: Standard_D2s_v3
